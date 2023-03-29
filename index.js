@@ -1,14 +1,17 @@
 import globals from 'globals';
 import { default as prettierConfig } from 'eslint-config-prettier';
+import { default as reactRecommended } from 'eslint-plugin-react/configs/recommended.js';
+import { default as reactJsxRuntime } from 'eslint-plugin-react/configs/jsx-runtime.js';
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import { coreRules } from './rules.js';
 
 // Don't set more than we need to — this is modern JS!
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
 
 // Returns the latest version of ES globals from the globals package
 const latestESGlobals = () => {
-  const esKeyRegex = /^es20\d{2}$/;
+  const esKeyRegex = /^es20\d{2}$/u;
   const latestESKey = Object.keys(globals)
     .filter(key => key.match(esKeyRegex))
     .sort()
@@ -22,6 +25,7 @@ const languageOptions = {
     // TODO: Make more specific globals for root and source files (root/vite
     // files should have node globals)
     ...globals.browser,
+    ...globals.node,
     ...latestESGlobals(),
   },
   // Vite uses ESBuild to transpile JS, but ESBuild doesn't expose an AST we can
@@ -43,25 +47,38 @@ const languageOptions = {
   sourceType: 'module',
 };
 
-const linterOptions = {
-  reportUnusedDisableDirectives: true,
+// It would be nice if this was the default, but changing it upstream would be
+// a breaking change so the maintainers declined.
+const reactPluginSettings = {
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
 
 const config = [
   {
-    files: ['**/*.js'],
+    ...reactRecommended,
+    ...reactPluginSettings,
+  },
+  reactJsxRuntime,
+  {
+    files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
-    linterOptions,
-    // plugins: {},
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
     rules: {
-      semi: 'error',
-      'no-unused-vars': 'error',
+      ...coreRules,
     },
   },
+  // Typescript only rules
   {
-    files: ['**/*.ts', '**/*.tsx', `**/*.d.ts`],
-    languageOptions,
-    linterOptions,
+    files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    // Seems like we don't need these bc this rule is a reduction of the globs above
+    // languageOptions,
+    // linterOptions,
     plugins: {
       '@typescript-eslint': typescriptPlugin,
     },

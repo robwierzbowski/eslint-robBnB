@@ -9,6 +9,10 @@ https://stackoverflow.com/questions/74237042/how-to-correctly-configure-the-pars
 
 Can't import most old configs, but I think you can import just rulesets (https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base/rules, etc)
 
+plugin-react supports new config, but the setup still feels kinda weird. Very close to no config but not quite. It also hides the plugin setup in its new default config. Props to them for supporting new config tho!
+
+The cascade and file globs are still confusing to me, but I think if I dumb down what I'm expecting and think of it as: each entry with a files key uses that files key for the glob, and deep merging every config on top of it, it makes sense.
+
 ### Desires
 
 No React / JSX Proptype rules, just TS rules
