@@ -1,10 +1,10 @@
-import globals from 'globals';
 import { default as prettierConfig } from 'eslint-config-prettier';
-import { default as reactRecommended } from 'eslint-plugin-react/configs/recommended.js';
-import { default as reactJsxRuntime } from 'eslint-plugin-react/configs/jsx-runtime.js';
+import { default as react } from 'eslint-plugin-react';
+import { default as reactPreferFunctionComponent } from 'eslint-plugin-react-prefer-function-component';
+import globals from 'globals';
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
-import { coreRules } from './rules.js';
+import { coreRules, reactPreferFunctionComponentRules, reactRules } from './rules.js';
 
 // Don't set more than we need to — this is modern JS!
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
@@ -22,7 +22,7 @@ const latestESGlobals = () => {
 
 const languageOptions = {
   globals: {
-    // TODO: Make more specific globals for root and source files (root/vite
+    // TODO: Make more specific globals for browser and node files (root/vite
     // files should have node globals)
     ...globals.browser,
     ...globals.node,
@@ -39,6 +39,9 @@ const languageOptions = {
   // https://github.com/swc-project/swc/issues/246
   parser: typescriptParser,
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 'latest',
     project: './tsconfig.json',
     sourceType: 'module',
@@ -47,32 +50,30 @@ const languageOptions = {
   sourceType: 'module',
 };
 
-// It would be nice if this was the default, but changing it upstream would be
-// a breaking change so the maintainers declined.
-const reactPluginSettings = {
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-};
-
 const config = [
-  {
-    ...reactRecommended,
-    ...reactPluginSettings,
-  },
-  reactJsxRuntime,
+  // All Javascript rules
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
+    plugins: {
+      react,
+      'react-prefer-function-component': reactPreferFunctionComponent,
+    },
     rules: {
       ...coreRules,
+      ...reactRules,
+      ...reactPreferFunctionComponentRules,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
+
   // Typescript only rules
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
@@ -83,6 +84,7 @@ const config = [
       '@typescript-eslint': typescriptPlugin,
     },
   },
+
   // Prettier config must be last to turn off conflicting rules from previous
   // configuration
   prettierConfig,
