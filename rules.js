@@ -818,6 +818,11 @@ const coreRules = {
   ...layoutAndFormatting,
 };
 
+const reactHooksRules = {
+  'react-hooks/rules-of-hooks': ERROR,
+  'react-hooks/exhaustive-deps': ERROR,
+};
+
 const reactPreferFunctionComponentRules = {
   'react-prefer-function-component/react-prefer-function-component': ERROR,
 };
@@ -999,4 +1004,4 @@ const reactRules = {
   'react/void-dom-elements-no-children': ERROR,
 };
 
-export { coreRules, reactPreferFunctionComponentRules, reactRules };
+export { coreRules, reactPreferFunctionComponentRules, reactRules, reactHooksRules };

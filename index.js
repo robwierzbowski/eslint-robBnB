@@ -1,10 +1,16 @@
 import { default as prettierConfig } from 'eslint-config-prettier';
 import { default as react } from 'eslint-plugin-react';
+import { default as reactHooks } from 'eslint-plugin-react-hooks';
 import { default as reactPreferFunctionComponent } from 'eslint-plugin-react-prefer-function-component';
 import globals from 'globals';
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
-import { coreRules, reactPreferFunctionComponentRules, reactRules } from './rules.js';
+import {
+  coreRules,
+  reactHooksRules,
+  reactPreferFunctionComponentRules,
+  reactRules,
+} from './rules.js';
 
 // Don't set more than we need to — this is modern JS!
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
@@ -61,11 +67,13 @@ const config = [
     plugins: {
       react,
       'react-prefer-function-component': reactPreferFunctionComponent,
+      'react-hooks': reactHooks,
     },
     rules: {
       ...coreRules,
       ...reactRules,
       ...reactPreferFunctionComponentRules,
+      ...reactHooksRules,
     },
     settings: {
       react: {
