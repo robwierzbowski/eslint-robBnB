@@ -66,8 +66,8 @@ const config = [
     },
     plugins: {
       react,
-      'react-prefer-function-component': reactPreferFunctionComponent,
       'react-hooks': reactHooks,
+      'react-pfc': reactPreferFunctionComponent,
     },
     rules: {
       ...coreRules,

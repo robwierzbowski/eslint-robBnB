@@ -824,7 +824,7 @@ const reactHooksRules = {
 };
 
 const reactPreferFunctionComponentRules = {
-  'react-prefer-function-component/react-prefer-function-component': ERROR,
+  'react-pfc/react-prefer-function-component': ERROR,
 };
 
 const reactRules = {
