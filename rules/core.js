@@ -543,7 +543,7 @@ const suggestions = {
       array: true,
       object: true,
     },
-    { enforceForRenamedProperties: true },
+    { enforceForRenamedProperties: false },
   ],
   // Disallow the use of `Math.pow` in favor of the `**` operator
   'prefer-exponentiation-operator': ERROR,
