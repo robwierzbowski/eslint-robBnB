@@ -1,14 +1,5 @@
-// TODO: Break each plugin's ruleset into a file that includes plugin config and
-// settings
 import confusingBrowserGlobals from 'confusing-browser-globals';
-
-// Constants to prevent typos
-const ERROR = 'error';
-const OFF = 'off';
-const WARN = 'warn';
-
-// Settings for any rule that can force newlines on a list of over 3 items
-const newlineOption = { minItems: 4 };
+import { ERROR, OFF, WARN, NEW_LINE_OPTION } from './shared.js';
 
 // These rules relate to possible logic errors in code
 // https://eslint.org/docs/latest/rules#possible-problems
@@ -626,12 +617,12 @@ const suggestions = {
 // https://eslint.org/docs/latest/rules/#layout--formatting
 const layoutAndFormatting = {
   // Enforce linebreaks after opening and before closing array brackets
-  'array-bracket-newline': [ERROR, newlineOption],
+  'array-bracket-newline': [ERROR, NEW_LINE_OPTION],
   // Enforce consistent spacing inside array brackets
   'array-bracket-spacing': [ERROR, 'never'],
   // Enforce line breaks after each array element
   // RW: Should match
-  'array-element-newline': [ERROR, newlineOption],
+  'array-element-newline': [ERROR, NEW_LINE_OPTION],
   // Require parentheses around arrow function arguments
   'arrow-parens': [ERROR, 'as-needed'],
   // Enforce consistent spacing before and after the arrow in arrow functions
@@ -657,7 +648,7 @@ const layoutAndFormatting = {
   // Enforce line breaks between arguments of a function call
   'function-call-argument-newline': [ERROR, 'consistent'],
   // Enforce consistent line breaks inside function parentheses
-  'function-paren-newline': [ERROR, newlineOption],
+  'function-paren-newline': [ERROR, NEW_LINE_OPTION],
   // Enforce consistent spacing around `*` operators in generator functions
   'generator-star-spacing': ERROR,
   // Enforce the location of arrow function bodies
@@ -723,7 +714,7 @@ const layoutAndFormatting = {
   // RW: Great rule!
   'nonblock-statement-body-position': ERROR,
   // Enforce consistent line breaks after opening and before closing braces
-  'object-curly-newline': [ERROR, 'always', newlineOption],
+  'object-curly-newline': [ERROR, 'always', NEW_LINE_OPTION],
   // Enforce consistent spacing inside braces
   'object-curly-spacing': [ERROR, 'always'],
   // Enforce placing object properties on separate lines
@@ -820,349 +811,4 @@ const coreRules = {
   ...layoutAndFormatting,
 };
 
-const importHelpfulWarnings = {
-  // Forbid any invalid exports, i.e. re-export of the same name
-  'import/export': ERROR,
-  // Forbid imported names marked with @deprecated documentation tag
-  'import/no-deprecated': ERROR,
-  // Forbid empty named import blocks
-  'import/no-empty-named-blocks': ERROR,
-  // Forbid the use of extraneous packages
-  // RW: Could tighten this up to forbid devDeps in src files
-  'import/no-extraneous-dependencies': ERROR,
-  // Forbid the use of mutable exports with var or let
-  'import/no-mutable-exports': ERROR,
-  // Forbid use of exported name as identifier of default export
-  'import/no-named-as-default': ERROR,
-  // Forbid use of exported name as property of default export
-  'import/no-named-as-default-member': ERROR,
-  // Forbid modules without exports, or exports without matching import in another module
-  // RW: This could be useful, but it also could be annoying excluding all
-  // settings files, or during development. Off for now.
-  'import/no-unused-modules': OFF,
-};
-
-const importModuleSystems = {
-  // Forbid AMD require and define calls
-  'import/no-amd': ERROR,
-  // Forbid CommonJS require calls and module.exports or exports
-  // RW: Mixing module systems, even in the same directories, is too common at
-  // this point
-  'import/no-commonjs': OFF,
-  // Forbid import statements with CommonJS module.exports
-  'import/no-import-module-exports': ERROR,
-  // Forbid Node.js builtin modules
-  // RW: We do often mix node and browser files in the same repo. If this had a paths
-  // option it would be more useful.
-  'import/no-nodejs-modules': OFF,
-  // Forbid potentially ambiguous parse goal (script vs. module)
-  // RW: This errors on safe d.ts files. The risk of dangerous mismatches in
-  // runtime code is unknown at this time, so let's disable for now
-  'import/unambiguous': OFF,
-};
-
-const importStaticAnalysis = {
-  // Ensure a default export is present, given a default import
-  'import/default': ERROR,
-  // Ensure named imports correspond to a named export in the remote file
-  'import/named': [ERROR, {}],
-  // Ensure imported namespaces contain dereferenced properties as they are dereferenced
-  'import/namespace': OFF,
-  // Forbid import of modules using absolute paths
-  'import/no-absolute-path': ERROR,
-  // Forbid a module from importing a module with a dependency path back to
-  // itself
-  // RW: Trade some safety for performance since we're using this primarily
-  // in-editor. We could also add a command line check to enable infinite depth
-  'import/no-cycle': [ERROR, { maxDepth: 5 }],
-  // Forbid require() calls with expressions
-  'import/no-dynamic-require': ERROR,
-  // Forbid importing the submodules of other modules
-  // RW: Could be useful but requires project specific configuration
-  'import/no-internal-modules': OFF,
-  // Forbid importing packages through relative paths
-  'import/no-relative-packages': OFF,
-  // Forbid importing modules from parent directories
-  'import/no-relative-parent-imports': OFF,
-  // Enforce which files can be imported in a given folder
-  'import/no-restricted-paths': OFF,
-  // Forbid a module from importing itself
-  'import/no-self-import': ERROR,
-  // Ensure imports point to a file/module that can be resolved
-  'import/no-unresolved': ERROR,
-  // Forbid unnecessary path segments in import and require statements
-  'import/no-useless-path-segments': ERROR,
-  // Forbid webpack loader syntax in imports
-  'import/no-webpack-loader-syntax': ERROR,
-};
-
-const importStyleGuide = {
-  // Enforce or ban the use of inline type-only markers for named imports
-  'import/consistent-type-specifier-style': [ERROR, 'prefer-top-level'],
-  // Enforce a leading comment with the webpackChunkName for dynamic imports
-  // RW: Not all of us are on Webpack anymore (Vite FTW!)
-  'import/dynamic-import-chunkname': OFF,
-  // Ensure all exports appear after other statements
-  'import/exports-last': ERROR,
-  // Ensure consistent use of file extension within the import path
-  // RW: Useful if using certain module resolution patterns (e.g., nodeNext),
-  // but very project specific
-  'import/extensions': OFF,
-  // Ensure all imports appear before other statements
-  'import/first': ERROR,
-  // Prefer named exports to be grouped together in a single export declaration
-  // RW: I LOVE this rule. Arguable, but IMO it improves understandability of
-  // long files
-  'import/group-exports': ERROR,
-  // Enforce the maximum number of dependencies a module can have
-  // RW: An arbitrary constraint that doesn't necessarily create more
-  // maintainable code
-  'import/max-dependencies': OFF,
-  // Enforce a newline after import statements
-  // RW: Handled by ESLint core
-  'import/newline-after-import': OFF,
-  // Forbid anonymous values as default exports
-  // RW: This isn't an issue when we prefer named exports
-  'import/no-anonymous-default-export': OFF,
-  // Forbid default exports
-  // RW: Trialing this rule. I would prefer it but I worry that too many
-  // settings files require default exports.
-  // TODO: Move to ERROR or OFF after trial period
-  'import/no-default-export': WARN,
-  // Forbid repeated import of the same module in multiple places
-  // RW: Handled by ESLint core
-  'import/no-duplicates': OFF,
-  // Forbid named default exports
-  // RW: TODO: Double check why we aren't doing this in the settings files. Node
-  // import style?
-  'import/no-named-default': OFF,
-  // Forbid named exports
-  // RW: We want to encourage named exports!
-  'import/no-named-export': OFF,
-  // Forbid namespace (a.k.a. "wildcard" *) imports
-  'import/no-namespace': OFF,
-  // Forbid unassigned imports
-  // RW: This style is becoming less and less common. We can disable at point of
-  // use for the few cases that it's still necessary (e.g., self executing
-  // polyfills)
-  'import/no-unassigned-import': ERROR,
-  // Enforce a convention in module import order
-  'import/order': [
-    ERROR,
-    {
-      groups: [
-        'builtin',
-        'external',
-        'internal',
-        'parent',
-        'sibling',
-        'index',
-        'object',
-        // RW: I'd like types to be next to their other imports. Let's see how
-        // this works in practice
-        'type',
-      ],
-      alphabetize: { order: 'asc', caseInsensitive: true },
-    },
-  ],
-  // Prefer a default export if module exports a single name or multiple names
-  // RW: We want to prefer named exports
-  'import/prefer-default-export': OFF,
-};
-
-const importRules = {
-  ...importHelpfulWarnings,
-  ...importModuleSystems,
-  ...importStaticAnalysis,
-  ...importStyleGuide,
-};
-
-const reactHooksRules = {
-  'react-hooks/rules-of-hooks': ERROR,
-  'react-hooks/exhaustive-deps': ERROR,
-};
-
-const reactPreferFunctionComponentRules = {
-  'react-pfc/react-prefer-function-component': ERROR,
-};
-
-const reactRules = {
-  'react/boolean-prop-naming': ERROR,
-  'react/button-has-type': ERROR,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/default-props-match-prop-types': OFF,
-  'react/destructuring-assignment': [ERROR, 'always'],
-  'react/display-name': OFF,
-  'react/forbid-component-props': ERROR,
-  'react/forbid-dom-props': OFF,
-  'react/forbid-elements': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/forbid-foreign-prop-types': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/forbid-prop-types': OFF,
-  'react/function-component-definition': [
-    ERROR,
-    {
-      namedComponents: 'arrow-function',
-      unnamedComponents: 'arrow-function',
-    },
-  ],
-  'react/hook-use-state': [ERROR, { allowDestructuredState: true }],
-  'react/iframe-missing-sandbox': ERROR,
-  'react/jsx-boolean-value': ERROR,
-  'react/jsx-child-element-spacing': ERROR,
-  'react/jsx-closing-bracket-location': ERROR,
-  'react/jsx-closing-tag-location': ERROR,
-  'react/jsx-curly-brace-presence': [ERROR, 'never'],
-  'react/jsx-curly-newline': [ERROR, 'consistent'],
-  'react/jsx-curly-spacing': [ERROR, { when: 'never', children: true }],
-  'react/jsx-equals-spacing': [ERROR, 'never'],
-  // RW: .jsx is required for correct Vite/EsBuild processing
-  'react/jsx-filename-extension': [
-    ERROR,
-    {
-      allow: 'as-needed',
-      extensions: ['.jsx', '.tsx'],
-    },
-  ],
-  'react/jsx-first-prop-new-line': [ERROR, 'multiline'],
-  'react/jsx-fragments': ERROR,
-  // RW: This could be useful, but needs some thoughtful configuration
-  'react/jsx-handler-names': OFF,
-  // RW: Handled by Prettier
-  'react/jsx-indent': OFF,
-  // RW: Handled by Prettier
-  'react/jsx-indent-props': OFF,
-  'react/jsx-key': ERROR,
-  // RW: This feels like a good outside-bounds guardrail for egregiously deep code
-  'react/jsx-max-depth': [ERROR, { max: 15 }],
-  'react/jsx-max-props-per-line': [ERROR, { maximum: 1, when: 'multiline' }],
-  'react/jsx-newline': OFF,
-  // RW: Do we want to force useCallback for all arrow functions in functional
-  // components? Arrow functions are commonly used to wrap hook executions, and
-  // cannot be hoisted to an outer scope. The cost of creating a new function
-  // per render is likely minimal, but the cost of re-renders if the prop is
-  // passed deeply could be significant. I'm going to leave this on for now, but
-  // I could def turn it off.
-  'react/jsx-no-bind': ERROR,
-  'react/jsx-no-comment-textnodes': ERROR,
-  'react/jsx-no-constructed-context-values': ERROR,
-  'react/jsx-no-duplicate-props': ERROR,
-  'react/jsx-no-leaked-render': ERROR,
-  'react/jsx-no-literals': OFF,
-  'react/jsx-no-script-url': ERROR,
-  // RW: This is not needed in modern browsers (Chrome ≥ 88, Edge ≥ 88, Firefox
-  // ≥ 79 and Safari ≥ 12.2). See:
-  // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-target-blank.md#when-to-override-it
-  'react/jsx-no-target-blank': OFF,
-  'react/jsx-no-undef': ERROR,
-  'react/jsx-no-useless-fragment': ERROR,
-  // RW: Allow some terseness. TODO: Check if this causes prettier conflicts.
-  'react/jsx-one-expression-per-line': [ERROR, { allow: 'single-child' }],
-  'react/jsx-pascal-case': ERROR,
-  'react/jsx-props-no-multi-spaces': ERROR,
-  // RW: Prop spreading is useful, especially with PropTypes and default props
-  // turned off (e.g., when passing groups of props or overriding a default set)
-  'react/jsx-props-no-spreading': OFF,
-  // RW: I do wish there was a `min` option for this one
-  'react/jsx-sort-props': ERROR,
-  // RW: TODO: Check that this doesn't conflict with JSX whitespace rules
-  'react/jsx-tag-spacing': ERROR,
-  // RW: Unnecessary due to Vite JSX runtime auto-insertion
-  'react/jsx-uses-react': OFF,
-  'react/jsx-uses-vars': ERROR,
-  'react/jsx-wrap-multilines': [
-    ERROR,
-    [
-      'error',
-      {
-        arrow: 'parens-new-line',
-        assignment: 'parens-new-line',
-        condition: 'parens-new-line',
-        declaration: 'parens-new-line',
-        logical: 'parens-new-line',
-        prop: 'parens-new-line',
-        return: 'parens-new-line',
-      },
-    ],
-  ],
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-access-state-in-setstate': OFF,
-  // RW: This feels over-restrictive. Let the author decide.
-  'react/no-adjacent-inline-elements': OFF,
-  'react/no-array-index-key': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-arrow-function-lifecycle': OFF,
-  'react/no-children-prop': ERROR,
-  'react/no-danger': ERROR,
-  'react/no-danger-with-children': ERROR,
-  'react/no-deprecated': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-did-mount-set-state': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-did-update-set-state': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-direct-mutation-state': OFF,
-  'react/no-find-dom-node': ERROR,
-  'react/no-invalid-html-attribute': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-is-mounted': OFF,
-  'react/no-multi-comp': OFF,
-  'react/no-namespace': ERROR,
-  'react/no-object-type-as-default-prop': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-redundant-should-component-update': OFF,
-  'react/no-render-return-value': ERROR,
-  'react/no-set-state': OFF,
-  'react/no-string-refs': ERROR,
-  'react/no-this-in-sfc': ERROR,
-  'react/no-typos': ERROR,
-  // RW: What a great rule. I've seen/caused this a couple times.
-  'react/no-unescaped-entities': ERROR,
-  'react/no-unknown-property': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-unsafe': OFF,
-  'react/no-unstable-nested-components': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-unused-class-component-methods': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/no-unused-prop-types': OFF,
-  'react/no-unused-state': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/no-will-update-set-state': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/prefer-es6-class': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/prefer-exact-props': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/prefer-read-only-props': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/prefer-stateless-function': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/prop-types': OFF,
-  // RW: Unnecessary due to Vite JSX runtime auto-insertion
-  'react/react-in-jsx-scope': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/require-default-props': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/require-optimization': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/require-render-return': OFF,
-  'react/self-closing-comp': ERROR,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/sort-comp': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/sort-default-props': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
-  'react/sort-prop-types': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/state-in-constructor': OFF,
-  // RW: Unnecessary class component rule (react-prefer-function-component)
-  'react/static-property-placement': OFF,
-  'react/style-prop-object': ERROR,
-  'react/void-dom-elements-no-children': ERROR,
-};
-
-// TODO: The rule for splitting elements after 3 lines is being overruled by
-// prettier I think. Can we fix that?
-export { coreRules, importRules, reactPreferFunctionComponentRules, reactRules, reactHooksRules };
+export { coreRules };
