@@ -1,12 +1,14 @@
+import { default as typescriptPlugin } from '@typescript-eslint/eslint-plugin';
+import * as typescriptParser from '@typescript-eslint/parser';
 import { default as prettierConfig } from 'eslint-config-prettier';
+import { default as importPlugin } from 'eslint-plugin-i';
 import { default as react } from 'eslint-plugin-react';
 import { default as reactHooks } from 'eslint-plugin-react-hooks';
 import { default as reactPreferFunctionComponent } from 'eslint-plugin-react-prefer-function-component';
 import globals from 'globals';
-import typescriptParser from '@typescript-eslint/parser';
-import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import {
   coreRules,
+  importRules,
   reactHooksRules,
   reactPreferFunctionComponentRules,
   reactRules,
@@ -65,17 +67,36 @@ const config = [
       reportUnusedDisableDirectives: true,
     },
     plugins: {
+      import: importPlugin,
       react,
       'react-hooks': reactHooks,
       'react-pfc': reactPreferFunctionComponent,
     },
     rules: {
       ...coreRules,
+      ...importRules,
       ...reactRules,
       ...reactPreferFunctionComponentRules,
       ...reactHooksRules,
     },
     settings: {
+      'import/ignore': [
+        // Prevents false positives in the common case when importing CJS deps
+        // with import statements
+        'node_modules',
+      ],
+      'import/parsers': {
+        // Parser settings are required for all files in order for import to use
+        // the new config file. This may not be necessary in future releases.
+        // https://github.com/import-js/eslint-plugin-import/issues/2556#issuecomment-1419518561
+        espree: ['.js', '.jsx'],
+        // TODO: Does this need to move into the block below?
+        '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
+      },
+      'import/resolver': {
+        typescript: true,
+        node: true,
+      },
       react: {
         version: 'detect',
       },
@@ -88,6 +109,8 @@ const config = [
     // Seems like we don't need these bc this rule is a reduction of the globs above
     // languageOptions,
     // linterOptions,
+
+    // TODO: Is this plugin doing anything? Prob need to add the rules
     plugins: {
       '@typescript-eslint': typescriptPlugin,
     },

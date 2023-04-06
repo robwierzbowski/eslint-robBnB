@@ -1,3 +1,5 @@
+// TODO: Break each plugin's ruleset into a file that includes plugin config and
+// settings
 import confusingBrowserGlobals from 'confusing-browser-globals';
 
 // Constants to prevent typos
@@ -732,7 +734,7 @@ const layoutAndFormatting = {
   'padded-blocks': [ERROR, 'never'],
   // Require or disallow padding lines between statements
 
-  // RW: These may be too strict, but let's see. ABNB doesn't set any of these.
+  // RW: These may be too strict, but let's see. AbNb doesn't set any of these.
   // I think there also might be plugins that do a better job of setting
   // linebreaks between types.
   'padding-line-between-statements': [
@@ -816,6 +818,163 @@ const coreRules = {
   ...possibleProblems,
   ...suggestions,
   ...layoutAndFormatting,
+};
+
+const importHelpfulWarnings = {
+  // Forbid any invalid exports, i.e. re-export of the same name
+  'import/export': ERROR,
+  // Forbid imported names marked with @deprecated documentation tag
+  'import/no-deprecated': ERROR,
+  // Forbid empty named import blocks
+  'import/no-empty-named-blocks': ERROR,
+  // Forbid the use of extraneous packages
+  // RW: Could tighten this up to forbid devDeps in src files
+  'import/no-extraneous-dependencies': ERROR,
+  // Forbid the use of mutable exports with var or let
+  'import/no-mutable-exports': ERROR,
+  // Forbid use of exported name as identifier of default export
+  'import/no-named-as-default': ERROR,
+  // Forbid use of exported name as property of default export
+  'import/no-named-as-default-member': ERROR,
+  // Forbid modules without exports, or exports without matching import in another module
+  // RW: This could be useful, but it also could be annoying excluding all
+  // settings files, or during development. Off for now.
+  'import/no-unused-modules': OFF,
+};
+
+const importModuleSystems = {
+  // Forbid AMD require and define calls
+  'import/no-amd': ERROR,
+  // Forbid CommonJS require calls and module.exports or exports
+  // RW: Mixing module systems, even in the same directories, is too common at
+  // this point
+  'import/no-commonjs': OFF,
+  // Forbid import statements with CommonJS module.exports
+  'import/no-import-module-exports': ERROR,
+  // Forbid Node.js builtin modules
+  // RW: We do often mix node and browser files in the same repo. If this had a paths
+  // option it would be more useful.
+  'import/no-nodejs-modules': OFF,
+  // Forbid potentially ambiguous parse goal (script vs. module)
+  // RW: This errors on safe d.ts files. The risk of dangerous mismatches in
+  // runtime code is unknown at this time, so let's disable for now
+  'import/unambiguous': OFF,
+};
+
+const importStaticAnalysis = {
+  // Ensure a default export is present, given a default import
+  'import/default': ERROR,
+  // Ensure named imports correspond to a named export in the remote file
+  'import/named': [ERROR, {}],
+  // Ensure imported namespaces contain dereferenced properties as they are dereferenced
+  'import/namespace': OFF,
+  // Forbid import of modules using absolute paths
+  'import/no-absolute-path': ERROR,
+  // Forbid a module from importing a module with a dependency path back to
+  // itself
+  // RW: Trade some safety for performance since we're using this primarily
+  // in-editor. We could also add a command line check to enable infinite depth
+  'import/no-cycle': [ERROR, { maxDepth: 5 }],
+  // Forbid require() calls with expressions
+  'import/no-dynamic-require': ERROR,
+  // Forbid importing the submodules of other modules
+  // RW: Could be useful but requires project specific configuration
+  'import/no-internal-modules': OFF,
+  // Forbid importing packages through relative paths
+  'import/no-relative-packages': OFF,
+  // Forbid importing modules from parent directories
+  'import/no-relative-parent-imports': OFF,
+  // Enforce which files can be imported in a given folder
+  'import/no-restricted-paths': OFF,
+  // Forbid a module from importing itself
+  'import/no-self-import': ERROR,
+  // Ensure imports point to a file/module that can be resolved
+  'import/no-unresolved': ERROR,
+  // Forbid unnecessary path segments in import and require statements
+  'import/no-useless-path-segments': ERROR,
+  // Forbid webpack loader syntax in imports
+  'import/no-webpack-loader-syntax': ERROR,
+};
+
+const importStyleGuide = {
+  // Enforce or ban the use of inline type-only markers for named imports
+  'import/consistent-type-specifier-style': [ERROR, 'prefer-top-level'],
+  // Enforce a leading comment with the webpackChunkName for dynamic imports
+  // RW: Not all of us are on Webpack anymore (Vite FTW!)
+  'import/dynamic-import-chunkname': OFF,
+  // Ensure all exports appear after other statements
+  'import/exports-last': ERROR,
+  // Ensure consistent use of file extension within the import path
+  // RW: Useful if using certain module resolution patterns (e.g., nodeNext),
+  // but very project specific
+  'import/extensions': OFF,
+  // Ensure all imports appear before other statements
+  'import/first': ERROR,
+  // Prefer named exports to be grouped together in a single export declaration
+  // RW: I LOVE this rule. Arguable, but IMO it improves understandability of
+  // long files
+  'import/group-exports': ERROR,
+  // Enforce the maximum number of dependencies a module can have
+  // RW: An arbitrary constraint that doesn't necessarily create more
+  // maintainable code
+  'import/max-dependencies': OFF,
+  // Enforce a newline after import statements
+  // RW: Handled by ESLint core
+  'import/newline-after-import': OFF,
+  // Forbid anonymous values as default exports
+  // RW: This isn't an issue when we prefer named exports
+  'import/no-anonymous-default-export': OFF,
+  // Forbid default exports
+  // RW: Trialing this rule. I would prefer it but I worry that too many
+  // settings files require default exports.
+  // TODO: Move to ERROR or OFF after trial period
+  'import/no-default-export': WARN,
+  // Forbid repeated import of the same module in multiple places
+  // RW: Handled by ESLint core
+  'import/no-duplicates': OFF,
+  // Forbid named default exports
+  // RW: TODO: Double check why we aren't doing this in the settings files. Node
+  // import style?
+  'import/no-named-default': OFF,
+  // Forbid named exports
+  // RW: We want to encourage named exports!
+  'import/no-named-export': OFF,
+  // Forbid namespace (a.k.a. "wildcard" *) imports
+  'import/no-namespace': OFF,
+  // Forbid unassigned imports
+  // RW: This style is becoming less and less common. We can disable at point of
+  // use for the few cases that it's still necessary (e.g., self executing
+  // polyfills)
+  'import/no-unassigned-import': ERROR,
+  // Enforce a convention in module import order
+  'import/order': [
+    ERROR,
+    {
+      groups: [
+        'builtin',
+        'external',
+        'internal',
+        'parent',
+        'sibling',
+        'index',
+        'object',
+        // RW: I'd like types to be next to their other imports. Let's see how
+        // this works in practice
+        'type',
+      ],
+      alphabetize: { order: 'asc', caseInsensitive: true },
+    },
+  ],
+  // Prefer a default export if module exports a single name or multiple names
+  // RW: We want to prefer named exports
+  'import/prefer-default-export': OFF,
+};
+
+const importRules = {
+  ...importHelpfulWarnings,
+  ...importModuleSystems,
+  ...importStaticAnalysis,
+  ...importStyleGuide,
 };
 
 const reactHooksRules = {
@@ -977,8 +1136,8 @@ const reactRules = {
   'react/prefer-exact-props': OFF,
   // RW: Unnecessary prop type rule; using TypeScript instead
   'react/prefer-read-only-props': OFF,
-  // RW: Why can't we prefer function components in all cases 🥲
-  'react/prefer-stateless-function': ERROR,
+  // RW: Unnecessary class component rule (react-prefer-function-component)
+  'react/prefer-stateless-function': OFF,
   // RW: Unnecessary prop type rule; using TypeScript instead
   'react/prop-types': OFF,
   // RW: Unnecessary due to Vite JSX runtime auto-insertion
@@ -1004,4 +1163,6 @@ const reactRules = {
   'react/void-dom-elements-no-children': ERROR,
 };
 
-export { coreRules, reactPreferFunctionComponentRules, reactRules, reactHooksRules };
+// TODO: The rule for splitting elements after 3 lines is being overruled by
+// prettier I think. Can we fix that?
+export { coreRules, importRules, reactPreferFunctionComponentRules, reactRules, reactHooksRules };
