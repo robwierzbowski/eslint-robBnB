@@ -1,5 +1,5 @@
 import confusingBrowserGlobals from 'confusing-browser-globals';
-import { ERROR, OFF, WARN, NEW_LINE_OPTION } from './shared.js';
+import { ERROR, OFF, WARN } from './shared.js';
 
 // These rules relate to possible logic errors in code
 // https://eslint.org/docs/latest/rules#possible-problems
@@ -617,11 +617,13 @@ const suggestions = {
 // https://eslint.org/docs/latest/rules/#layout--formatting
 const layoutAndFormatting = {
   // Enforce linebreaks after opening and before closing array brackets
-  'array-bracket-newline': [ERROR, NEW_LINE_OPTION],
+  // RW: Handled by Prettier
+  'array-bracket-newline': OFF,
   // Enforce consistent spacing inside array brackets
   'array-bracket-spacing': [ERROR, 'never'],
   // Enforce line breaks after each array element
-  'array-element-newline': [ERROR, NEW_LINE_OPTION],
+  // RW: Handled by Prettier
+  'array-element-newline': OFF,
   // Require parentheses around arrow function arguments
   'arrow-parens': [ERROR, 'as-needed'],
   // Enforce consistent spacing before and after the arrow in arrow functions
@@ -647,7 +649,8 @@ const layoutAndFormatting = {
   // Enforce line breaks between arguments of a function call
   'function-call-argument-newline': [ERROR, 'consistent'],
   // Enforce consistent line breaks inside function parentheses
-  'function-paren-newline': [ERROR, NEW_LINE_OPTION],
+  // RW: Handled by Prettier
+  'function-paren-newline': OFF,
   // Enforce consistent spacing around `*` operators in generator functions
   'generator-star-spacing': ERROR,
   // Enforce the location of arrow function bodies
@@ -717,7 +720,8 @@ const layoutAndFormatting = {
   // RW: Great rule!
   'nonblock-statement-body-position': ERROR,
   // Enforce consistent line breaks after opening and before closing braces
-  'object-curly-newline': [ERROR, 'always', NEW_LINE_OPTION],
+  // RW: Handled by Prettier
+  'object-curly-newline': OFF,
   // Enforce consistent spacing inside braces
   'object-curly-spacing': [ERROR, 'always'],
   // Enforce placing object properties on separate lines
