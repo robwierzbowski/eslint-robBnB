@@ -60,6 +60,10 @@ const languageOptions = {
 
 const config = [
   {
+    ignores: ['dist/*'],
+  },
+
+  {
     files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
     linterOptions: {
