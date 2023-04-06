@@ -210,8 +210,7 @@ const suggestions = {
   // Disallow `Array` constructors
   'no-array-constructor': ERROR,
   // Disallow bitwise operators
-  // RW: It's too clever — survey 10 engineers on whether they understand them
-  // at a glance
+  // RW: Too clever for most cases
   'no-bitwise': ERROR,
   // Disallow the use of `arguments.caller` or `arguments.callee`
   'no-caller': ERROR,
@@ -530,7 +529,8 @@ const suggestions = {
   // Require or disallow assignment operator shorthand where possible
   'operator-assignment': ERROR,
   // Require using arrow functions for callbacks
-  'prefer-arrow-callback': ERROR,
+  // RW: Unnecessary due to prefer-arrow plugin
+  'prefer-arrow-callback': OFF,
   // Require `const` declarations for variables that are never reassigned after declared
   'prefer-const': ERROR,
   // Require destructuring from arrays and/or objects
@@ -621,7 +621,6 @@ const layoutAndFormatting = {
   // Enforce consistent spacing inside array brackets
   'array-bracket-spacing': [ERROR, 'never'],
   // Enforce line breaks after each array element
-  // RW: Should match
   'array-element-newline': [ERROR, NEW_LINE_OPTION],
   // Require parentheses around arrow function arguments
   'arrow-parens': [ERROR, 'as-needed'],

@@ -3,6 +3,7 @@ import { default as prettierConfig } from 'eslint-config-prettier';
 import globals from 'globals';
 import { coreRules } from './rules/core.js';
 import { importPluginConfig, importRules, importSettings } from './rules/import.js';
+import { preferArrowPluginConfig, preferArrowRules } from './rules/preferArrow.js';
 import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
 import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPreferFunctionComponent.js';
@@ -59,6 +60,7 @@ const config = [
     },
     plugins: {
       ...importPluginConfig,
+      ...preferArrowPluginConfig,
       ...reactHooksPluginConfig,
       ...reactPFCPluginConfig,
       ...reactPluginConfig,
@@ -66,6 +68,7 @@ const config = [
     rules: {
       ...coreRules,
       ...importRules,
+      ...preferArrowRules,
       ...reactHooksRules,
       ...reactPFCRules,
       ...reactRules,
