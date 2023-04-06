@@ -1,5 +1,5 @@
 import * as typescriptParser from '@typescript-eslint/parser';
-import { default as prettierConfig } from 'eslint-config-prettier';
+import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
 import { coreRules } from './rules/core.js';
 import {
@@ -13,10 +13,7 @@ import {
 } from './rules/preferArrow.js';
 import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
-import {
-  reactPFCPluginConfig,
-  reactPFCRules,
-} from './rules/reactPreferFunctionComponent.js';
+import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
 import { typescriptPluginConfig, typescriptRules } from './rules/typescript.js';
 
 // Don't set more than we need to — this is modern JS!

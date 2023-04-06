@@ -1,4 +1,4 @@
-import { default as importPlugin } from 'eslint-plugin-i';
+import importPlugin from 'eslint-plugin-i';
 import { ERROR, OFF, WARN, addPrefix } from './shared.js';
 
 const prefix = 'import';
