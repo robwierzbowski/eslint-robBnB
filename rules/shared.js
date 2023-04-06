@@ -7,6 +7,8 @@ const WARN = 'warn';
 const NEW_LINE_OPTION = { minItems: 4 };
 
 const addPrefix = (prefix, rules) =>
-  Object.fromEntries(Object.entries(rules).map(([key, value]) => [`${prefix}/${key}`, value]));
+  Object.fromEntries(
+    Object.entries(rules).map(([key, value]) => [`${prefix}/${key}`, value]),
+  );
 
 export { ERROR, OFF, WARN, NEW_LINE_OPTION, addPrefix };

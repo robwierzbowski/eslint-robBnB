@@ -669,13 +669,17 @@ const layoutAndFormatting = {
   'lines-around-comment': ERROR,
   // Require or disallow an empty line between class members
   // RW: Allow for compact code in simple classes
-  'lines-between-class-members': [ERROR, 'always', { exceptAfterSingleLine: true }],
+  'lines-between-class-members': [
+    ERROR,
+    'always',
+    { exceptAfterSingleLine: true },
+  ],
   // Enforce a maximum line length
-  // RW: Modern editors and screens, we love 100 lines these days
+  // RW: Match prettier's preferred 80 character limit
   'max-len': [
     ERROR,
     {
-      code: 100,
+      code: 80,
       ignoreRegExpLiterals: true,
       ignoreStrings: true,
       ignoreTemplateLiterals: true,
