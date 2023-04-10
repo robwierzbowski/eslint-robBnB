@@ -8,7 +8,6 @@ import {
   importSettings,
 } from './rules/import.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
-import { noSecretsPluginConfig, noSecretsRules } from './rules/noSecrets.js';
 import {
   packageJsonPluginConfig,
   packageJsonRules,
@@ -87,7 +86,6 @@ const config = [
     plugins: {
       ...importPluginConfig,
       ...jsxA11yPluginConfig,
-      ...noSecretsPluginConfig,
       ...packageJsonPluginConfig,
       ...preferArrowPluginConfig,
       ...preferEarlyReturnPluginConfig,
@@ -101,7 +99,6 @@ const config = [
       ...coreRules,
       ...importRules,
       ...jsxA11yRules,
-      ...noSecretsRules,
       ...packageJsonRules,
       ...preferArrowRules,
       ...preferEarlyReturnRules,
