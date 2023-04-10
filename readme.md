@@ -32,6 +32,11 @@ In order to keep the static analysis performant, may want to mark some slower
 rules with a "CLI only" process env var. Then we can run a full suite pre
 commit, and a fast suite in editor.
 
+Other plugins that might be interesting:
+
+- https://github.com/microsoft/eslint-plugin-sdl
+- https://github.com/EvgenyOrekhov/eslint-config-hardcore
+
 ### Desires
 
 No React / JSX Proptype rules, just TS rules Force const / arrow over func

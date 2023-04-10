@@ -13,6 +13,10 @@ import {
   preferArrowPluginConfig,
   preferArrowRules,
 } from './rules/preferArrow.js';
+import {
+  preferEarlyReturnPluginConfig,
+  preferEarlyReturnRules,
+} from './rules/preferEarlyReturn.js';
 import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
 import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
@@ -81,6 +85,7 @@ const config = [
       ...jsxA11yPluginConfig,
       ...noSecretsPluginConfig,
       ...preferArrowPluginConfig,
+      ...preferEarlyReturnPluginConfig,
       ...reactHooksPluginConfig,
       ...reactPFCPluginConfig,
       ...reactPluginConfig,
@@ -93,6 +98,7 @@ const config = [
       ...jsxA11yRules,
       ...noSecretsRules,
       ...preferArrowRules,
+      ...preferEarlyReturnRules,
       ...reactHooksRules,
       ...reactPFCRules,
       ...reactRules,
