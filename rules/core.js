@@ -374,10 +374,10 @@ const suggestions = {
       message:
         'Use Number.isNaN instead https://github.com/airbnb/javascript#standard-library--isnan',
     },
-  ]
     // RW: confusingBrowserGlobals is a list of window vars that should be
     // called off window as opposed to standalone.
-    .concat(confusingBrowserGlobals),
+    ...confusingBrowserGlobals,
+  ],
   // Disallow specified modules when loaded by `import`
   'no-restricted-imports': OFF,
   // Disallow certain properties on certain objects

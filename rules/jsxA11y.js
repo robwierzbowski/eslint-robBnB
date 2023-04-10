@@ -39,7 +39,7 @@ const rules = {
   // Enforce all anchors are valid, navigable elements.
   // RW: The defaults should work well in a modern TS/JS app. If we run into any
   // issue with Link components, ABnB's config may be a useful reference:
-  // https://github.com/airbnb/javascript/blob/5c01a1094986c4dd50a6ee4d9f7617abdfabb58a/packages/eslint-config-airbnb/rules/react-a11y.js#L35-L39
+  // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/rules/react-a11y.js#L35-L39
   'anchor-is-valid': ERROR,
   // Enforce elements with aria-activedescendant are tabbable.
   'aria-activedescendant-has-tabindex': ERROR,
