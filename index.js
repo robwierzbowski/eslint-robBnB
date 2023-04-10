@@ -18,6 +18,10 @@ import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
 import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
 import { typescriptPluginConfig, typescriptRules } from './rules/typescript.js';
 import { unicornPluginConfig, unicornRules } from './rules/unicorn.js';
+import {
+  validateJsxNestingPluginConfig,
+  validateJsxNestingRules,
+} from './rules/validateJsxNesting.js';
 
 // Don't set more than we need to — this is modern JS!
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
@@ -81,6 +85,7 @@ const config = [
       ...reactPFCPluginConfig,
       ...reactPluginConfig,
       ...unicornPluginConfig,
+      ...validateJsxNestingPluginConfig,
     },
     rules: {
       ...coreRules,
@@ -92,6 +97,7 @@ const config = [
       ...reactPFCRules,
       ...reactRules,
       ...unicornRules,
+      ...validateJsxNestingRules,
     },
     settings: {
       ...importSettings,

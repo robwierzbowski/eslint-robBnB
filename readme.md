@@ -28,6 +28,10 @@ point, but we can do better.
 There are lots of good DOM manip rules but I'm gonna assume we're mostly working
 with a JSX framework and keep those rules to the minimum.
 
+In order to keep the static analysis performant, may want to mark some slower
+rules with a "CLI only" process env var. Then we can run a full suite pre
+commit, and a fast suite in editor.
+
 ### Desires
 
 No React / JSX Proptype rules, just TS rules Force const / arrow over func
