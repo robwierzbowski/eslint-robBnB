@@ -36,6 +36,19 @@ Other plugins that might be interesting:
 
 - https://github.com/microsoft/eslint-plugin-sdl
 - https://github.com/EvgenyOrekhov/eslint-config-hardcore
+- some rules from https://github.com/Shopify/web-configs/tree/main/packages/eslint-plugin
+- https://github.com/buildo/eslint-plugin-no-loops (YESSS, although i've read for-of loops can be optimized by the engine in ways iterator methods can't be)
+- https://github.com/bmatcuk/eslint-plugin-postcss-modules
+- https://www.npmjs.com/package/eslint-plugin-jest-formatting
+- https://github.com/SonarSource/eslint-plugin-sonarjs (Edge case bugs, good rules but IDK if it's worth it as a plugin. Maybe CLI only)
+- https://github.com/nickdeis/eslint-plugin-no-secrets (good but false positives on commit shas, so ROI is team dependent)
+
+Must haves:
+
+- https://typescript-eslint.io/getting-started/ (next!)
+<!-- The repo must use jest and testing library before I configure these -->
+- https://github.com/testing-library/eslint-plugin-testing-library
+- https://github.com/jest-community/eslint-plugin-jest
 
 ### Desires
 
