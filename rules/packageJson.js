@@ -1,3 +1,6 @@
+// TODO: This file currently isn't applyable because I can't get a parser to
+// parse JSON well in the new config. Find a good parser tutorial for the flat
+// config and re-implement.
 import packageJson from 'eslint-plugin-package-json';
 import { ERROR, addPrefix } from './shared.js';
 

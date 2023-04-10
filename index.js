@@ -9,10 +9,6 @@ import {
 } from './rules/import.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
 import {
-  packageJsonPluginConfig,
-  packageJsonRules,
-} from './rules/packageJson.js';
-import {
   preferArrowPluginConfig,
   preferArrowRules,
 } from './rules/preferArrow.js';
@@ -86,7 +82,6 @@ const config = [
     plugins: {
       ...importPluginConfig,
       ...jsxA11yPluginConfig,
-      ...packageJsonPluginConfig,
       ...preferArrowPluginConfig,
       ...preferEarlyReturnPluginConfig,
       ...reactHooksPluginConfig,
@@ -99,7 +94,6 @@ const config = [
       ...coreRules,
       ...importRules,
       ...jsxA11yRules,
-      ...packageJsonRules,
       ...preferArrowRules,
       ...preferEarlyReturnRules,
       ...reactHooksRules,
