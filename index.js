@@ -16,6 +16,7 @@ import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
 import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
 import { typescriptPluginConfig, typescriptRules } from './rules/typescript.js';
+import { unicornPluginConfig, unicornRules } from './rules/unicorn.js';
 
 // Don't set more than we need to — this is modern JS!
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
@@ -77,6 +78,7 @@ const config = [
       ...reactHooksPluginConfig,
       ...reactPFCPluginConfig,
       ...reactPluginConfig,
+      ...unicornPluginConfig,
     },
     rules: {
       ...coreRules,
@@ -86,6 +88,7 @@ const config = [
       ...reactHooksRules,
       ...reactPFCRules,
       ...reactRules,
+      ...unicornRules,
     },
     settings: {
       ...importSettings,
