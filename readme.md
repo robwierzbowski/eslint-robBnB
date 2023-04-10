@@ -25,6 +25,9 @@ ABnB is a good resource, but it's not that strict (including
 contains deprecated rules and is missing some newer rules. It's a fine starting
 point, but we can do better.
 
+There are lots of good DOM manip rules but I'm gonna assume we're mostly working
+with a JSX framework and keep those rules to the minimum.
+
 ### Desires
 
 No React / JSX Proptype rules, just TS rules Force const / arrow over func
