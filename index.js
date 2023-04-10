@@ -8,6 +8,7 @@ import {
   importSettings,
 } from './rules/import.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
+import { noSecretsPluginConfig, noSecretsRules } from './rules/noSecrets.js';
 import {
   preferArrowPluginConfig,
   preferArrowRules,
@@ -74,6 +75,7 @@ const config = [
     plugins: {
       ...importPluginConfig,
       ...jsxA11yPluginConfig,
+      ...noSecretsPluginConfig,
       ...preferArrowPluginConfig,
       ...reactHooksPluginConfig,
       ...reactPFCPluginConfig,
@@ -84,6 +86,7 @@ const config = [
       ...coreRules,
       ...importRules,
       ...jsxA11yRules,
+      ...noSecretsRules,
       ...preferArrowRules,
       ...reactHooksRules,
       ...reactPFCRules,
