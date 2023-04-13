@@ -1,11 +1,15 @@
 // Constants to prevent typos
+// TODO: when we convert all to types, are the constants useful anymore?
 const ERROR = 'error';
 const OFF = 'off';
 const WARN = 'warn';
 
-const addPrefix = (prefix, rules) =>
+const addPrefix = (prefix, unprefixedRules) =>
   Object.fromEntries(
-    Object.entries(rules).map(([key, value]) => [`${prefix}/${key}`, value]),
+    Object.entries(unprefixedRules).map(([key, value]) => [
+      `${prefix}/${key}`,
+      value,
+    ]),
   );
 
 export { ERROR, OFF, WARN, addPrefix };

@@ -27,7 +27,7 @@ import {
 } from './rules/validateJsxNesting.js';
 
 // Don't set more than we need to — this is modern JS!
-process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = true;
+process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = 'true';
 
 // Returns the latest version of ES globals from the globals package
 const latestESGlobals = () => {
@@ -63,8 +63,12 @@ const languageOptions = {
       jsx: true,
     },
     ecmaVersion: 'latest',
+    // Using the new auto-inserted JSX pragma
+    // https://typescript-eslint.io/architecture/parser/#jsxpragma
+    jsxPragma: null,
     project: './tsconfig.json',
     sourceType: 'module',
+    tsconfigRootDir: '.',
   },
 };
 
@@ -110,11 +114,6 @@ const config = [
 
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
-    // Seems like we don't need these settings bc this rule is a reduction of
-    // the globs above
-    // languageOptions,
-    // linterOptions,
-
     plugins: {
       ...typescriptPluginConfig,
     },
