@@ -30,9 +30,9 @@ point, but we can do better.
 There are lots of good DOM manip rules but I'm gonna assume we're mostly working
 with a JSX framework and keep those rules to the minimum.
 
-In order to keep the static analysis performant, may want to mark some slower
-rules with a "CLI only" process env var. Then we can run a full suite pre
-commit, and a fast suite in editor.
+In order to keep the static analysis performant, may want to move some rules
+under a "CLI only" flag. Then we can run a fast suite in editor, and a more full
+featured set before commit or push.
 https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708
 
 Other plugins that might be interesting:

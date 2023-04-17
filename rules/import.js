@@ -11,6 +11,8 @@ const importHelpfulWarnings = {
   // Forbid any invalid exports, i.e. re-export of the same name
   export: ERROR,
   // Forbid imported names marked with @deprecated documentation tag
+  // RW: This rule has poor performance, and could be moved under a CLI-only
+  // flag
   'no-deprecated': ERROR,
   // Forbid empty named import blocks
   'no-empty-named-blocks': ERROR,
