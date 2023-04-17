@@ -1,7 +1,3 @@
-// It doesn't seem like there's an easy way to write eslint settings files in
-// TypeScript at this time. I think it would require getting both the CLI and
-// the editor to use an executor that understands TS files without compilation,
-// like ts-node.
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 
 // Rules from this plugin already have the `@typescript-eslint` prefix inlined
