@@ -1,5 +1,5 @@
 import importPlugin from 'eslint-plugin-i';
-import { ERROR, OFF, WARN, addPrefix } from './shared.js';
+import { ERROR, OFF, addPrefix } from './shared.js';
 
 const prefix = 'import';
 
@@ -15,7 +15,6 @@ const importHelpfulWarnings = {
   // Forbid empty named import blocks
   'no-empty-named-blocks': ERROR,
   // Forbid the use of extraneous packages
-  // RW: Could tighten this up to forbid devDeps in src files
   'no-extraneous-dependencies': ERROR,
   // Forbid the use of mutable exports with var or let
   'no-mutable-exports': ERROR,
@@ -24,8 +23,8 @@ const importHelpfulWarnings = {
   // Forbid use of exported name as property of default export
   'no-named-as-default-member': ERROR,
   // Forbid modules without exports, or exports without matching import in another module
-  // RW: This could be useful, but it also could be annoying excluding all
-  // settings files, or during development. Off for now.
+  // RW: This could be useful, but it could be often-changing configuration to
+  // exclude settings files. Off for now.
   'no-unused-modules': OFF,
 };
 
@@ -33,18 +32,15 @@ const importModuleSystems = {
   // Forbid AMD require and define calls
   'no-amd': ERROR,
   // Forbid CommonJS require calls and module.exports or exports
-  // RW: Mixing module systems, even in the same directories, is too common at
-  // this point
+  // RW: Using CommonJS is still sometimes required at this point
   'no-commonjs': OFF,
   // Forbid import statements with CommonJS module.exports
   'no-import-module-exports': ERROR,
   // Forbid Node.js builtin modules
-  // RW: We do often mix node and browser files in the same repo. If this had a paths
-  // option it would be more useful.
   'no-nodejs-modules': OFF,
   // Forbid potentially ambiguous parse goal (script vs. module)
-  // RW: This errors on safe d.ts files. The risk of dangerous mismatches in
-  // runtime code is unknown at this time, so let's disable for now
+  // RW: This errors on d.ts files. The risk of dangerous mismatches in runtime
+  // code is unknown at this time, so let's disable for now.
   unambiguous: OFF,
 };
 
@@ -60,7 +56,7 @@ const importStaticAnalysis = {
   // Forbid a module from importing a module with a dependency path back to
   // itself
   // RW: Trade some safety for performance since we're using this primarily
-  // in-editor. We could also add a command line check to enable infinite depth
+  // in-editor. We could also add a command line check to enable infinite depth.
   'no-cycle': [ERROR, { maxDepth: 5 }],
   // Forbid require() calls with expressions
   'no-dynamic-require': ERROR,
@@ -98,8 +94,7 @@ const importStyleGuide = {
   // Ensure all imports appear before other statements
   first: ERROR,
   // Prefer named exports to be grouped together in a single export declaration
-  // RW: I LOVE this rule. Arguable, but IMO it improves understandability of
-  // long files
+  // RW: I LOVE this rule. IMO it improves understandability of larger files
   'group-exports': ERROR,
   // Enforce the maximum number of dependencies a module can have
   // RW: An arbitrary constraint that doesn't necessarily create more
@@ -112,22 +107,19 @@ const importStyleGuide = {
   // RW: This isn't an issue when we prefer named exports
   'no-anonymous-default-export': OFF,
   // Forbid default exports
-  // RW: Trialing this rule. I would prefer it but I worry that too many
-  // settings files require default exports.
-  // TODO: Move to ERROR or OFF after trial period
-  'no-default-export': WARN,
+  // RW: Named exports create more consistent code. Settings files that require
+  // default exports can use disable comments.
+  'no-default-export': ERROR,
   // Forbid repeated import of the same module in multiple places
   // RW: Handled by ESLint core
   'no-duplicates': OFF,
   // Forbid named default exports
-  // RW: TODO: Double check why we aren't doing this in the settings files. Node
-  // import style?
   'no-named-default': OFF,
   // Forbid named exports
   // RW: We want to encourage named exports!
   'no-named-export': OFF,
   // Forbid namespace (a.k.a. "wildcard" *) imports
-  'no-namespace': OFF,
+  'no-namespace': ERROR,
   // Forbid unassigned imports
   // RW: This style is becoming less and less common. We can disable at point of
   // use for the few cases that it's still necessary (e.g., self executing
@@ -146,14 +138,13 @@ const importStyleGuide = {
         'index',
         'object',
         // RW: I'd like types to be next to their other imports. Let's see how
-        // this works in practice
+        // this works in practice.
         'type',
       ],
       alphabetize: { order: 'asc', caseInsensitive: true },
     },
   ],
   // Prefer a default export if module exports a single name or multiple names
-  // RW: We want to prefer named exports
   'prefer-default-export': OFF,
 };
 
@@ -166,13 +157,12 @@ const importRules = addPrefix(prefix, {
 
 const importSettings = {
   'import/ignore': [
-    // Prevents false positives in the common case when importing CJS deps
-    // with import statements
+    // Prevents false positives when importing CJS deps with import statements
     'node_modules',
   ],
   'import/parsers': {
-    // Parser settings are required for all files in order for import to use
-    // the new config file. This may not be necessary in future releases.
+    // Parser settings are required for all files in order for the import plugin
+    // to use the new flat config. This may not be necessary in future releases.
     // https://github.com/import-js/eslint-plugin-import/issues/2556#issuecomment-1419518561
     espree: ['.js', '.jsx'],
     // TODO: Does this need to move into the block below?

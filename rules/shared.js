@@ -1,5 +1,4 @@
 // Constants to prevent typos
-// TODO: when we convert all to types, are the constants useful anymore?
 const ERROR = 'error';
 const OFF = 'off';
 const WARN = 'warn';

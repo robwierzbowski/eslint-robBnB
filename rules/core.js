@@ -60,7 +60,7 @@ const possibleProblems = {
   // Disallow assigning to imported bindings
   'no-import-assign': ERROR,
   // Disallow variable or `function` declarations in nested blocks
-  // RW: Note, this is only for functions, although the description mentions
+  // RW: This rule is only for functions, although the description mentions
   // variables
   'no-inner-declarations': ERROR,
   // Disallow invalid regular expression strings in `RegExp` constructors
@@ -161,7 +161,7 @@ const suggestions = {
   // Require the use of `===` and `!==`
   eqeqeq: ERROR,
   // Require function names to match the name of the variable or property to which they are assigned
-  // RW: This doesn't need to be set because I'm going to forbid the function keyword
+  // RW: Unnecessary because we forbid the function keyword
   'func-name-matching': ERROR,
   // Require or disallow named `function` expressions
   'func-names': [ERROR, 'as-needed'],
@@ -175,7 +175,7 @@ const suggestions = {
   // Disallow specified identifiers
   'id-denylist': OFF,
   // Enforce minimum and maximum identifier lengths
-  // RW: prevent people from using i, e, j, and other non-descriptive var
+  // RW: prevent people from using i, e, j, and other non-descriptive variable
   // names
   'id-length': [ERROR, { min: 2, max: Infinity }],
   // Require identifiers to match a specified regular expression
@@ -201,7 +201,6 @@ const suggestions = {
   // Enforce a maximum number of statements allowed in function blocks
   'max-statements': OFF,
   // Enforce a particular style for multiline comments
-  // RW: But this could be a good one....
   'multiline-comment-style': OFF,
   // Require constructor names to begin with a capital letter
   'new-cap': ERROR,
@@ -210,7 +209,7 @@ const suggestions = {
   // Disallow `Array` constructors
   'no-array-constructor': ERROR,
   // Disallow bitwise operators
-  // RW: Too clever for most cases
+  // RW: Bitwise operators are too clever for most use cases
   'no-bitwise': ERROR,
   // Disallow the use of `arguments.caller` or `arguments.callee`
   'no-caller': ERROR,
@@ -246,8 +245,8 @@ const suggestions = {
   // Disallow unnecessary calls to `.bind()`
   'no-extra-bind': ERROR,
   // Disallow unnecessary boolean casts
-  // RW: Making this an error forces the author to understand casting in a
-  // conditional block
+  // RW: Making this an error forces the author to understand how casting works
+  // in a conditional block
   'no-extra-boolean-cast': ERROR,
   // Disallow unnecessary labels
   // RW: Unnecessary due to no-labels
@@ -285,7 +284,7 @@ const suggestions = {
   // RW: Unnecessary due to no-labels
   'no-label-var': OFF,
   // Disallow labeled statements
-  // RW: This renders other label rules unnecessary
+  // RW: This makes other label rules unnecessary
   'no-labels': ERROR,
   // Disallow unnecessary nested blocks
   'no-lone-blocks': ERROR,
@@ -308,35 +307,30 @@ const suggestions = {
   // a glance
   'no-multi-str': OFF,
   // Disallow negated conditions
-  // RW: WOW! I'm surprised this rule exists, and it aligns with my philosophy.
-  // But, it might add more friction than benefit in a larger organization.
+  // RW: Although this rule aligns with my philosophy, it could add too much
+  // friction in a larger organization
   'no-negated-condition': OFF,
   // Disallow nested ternary expressions
-  // RW: Even tho I personally love a chained ternary
   'no-nested-ternary': ERROR,
   // Disallow `new` operators outside of assignments or comparisons
   'no-new': ERROR,
   // Disallow `new` operators with the `Function` object
   'no-new-func': ERROR,
   // Disallow `Object` constructors
-  // RW: This ain't an OO language people
+  // RW: This isn't an OO language people
   'no-new-object': ERROR,
   // Disallow `new` operators with the `String`, `Number`, and `Boolean` objects
   'no-new-wrappers': ERROR,
   // Disallow `\8` and `\9` escape sequences in string literals
   'no-nonoctal-decimal-escape': ERROR,
   // Disallow octal literals
-  // RW: Although there are reasons to manually manage octals, they're rare and
-  // a leading aero is most likely a mistake
+  // RW: Although there are reasons to manually manage octals, they're rare
   'no-octal': ERROR,
   // Disallow octal escape sequences in string literals
   'no-octal-escape': ERROR,
   // Disallow reassigning `function` parameters
   'no-param-reassign': ERROR,
   // Disallow the unary operators `++` and `--`
-  // RW: Although I don't think these are exceptionally dangerous, I can't deny
-  // that code written with explicit assignment is more readable and less prone
-  // to error.
   'no-plusplus': OFF,
   // Disallow the use of the `__proto__` property
   'no-proto': ERROR,
@@ -353,7 +347,8 @@ const suggestions = {
     {
       restrictedNamedExports: [
         // Use `export default` to provide a default export
-        'default', // This will break most node ESM versions whem your module is imported
+        'default',
+        // This will break most node ESM versions when the module is imported
         // with a dynamic `import()`
         'then',
       ],
@@ -374,8 +369,8 @@ const suggestions = {
       message:
         'Use Number.isNaN instead https://github.com/airbnb/javascript#standard-library--isnan',
     },
-    // RW: confusingBrowserGlobals is a list of window vars that should be
-    // called off window as opposed to standalone.
+    // RW: confusingBrowserGlobals provides window keys that should be called
+    // off the window object in order to improve code clarity
     ...confusingBrowserGlobals,
   ],
   // Disallow specified modules when loaded by `import`
@@ -435,8 +430,9 @@ const suggestions = {
     },
   ],
   // Disallow specified syntax
-  // RW: AirBnB has some good restrictions here. Do allow for-of; this is modern
-  // JS.
+
+  // RW: AirBnB has some good restrictions here, but we should allow for-of;
+  // this is modern JS
   // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/style.js#L340-L358
   'no-restricted-syntax': [
     ERROR,
@@ -459,7 +455,6 @@ const suggestions = {
   // Disallow assignment operators in `return` statements
   'no-return-assign': ERROR,
   // Disallow unnecessary `return await`
-
   // RW: This improves perf at the cost of stack trace completeness. IMO it's a
   // rare occasion and there are ways of debugging outside of a full stack
   // trace.
@@ -475,8 +470,8 @@ const suggestions = {
   // Disallow ternary operators
   'no-ternary': OFF,
   // Disallow throwing literals as exceptions
-  // RW: This is another extra tight rule that prioritizes correctness over ease
-  // of throw away debugging code. IMO it's long term worth it.
+  // RW: This is another strict rule that prioritizes correctness over use of
+  // messy debugging code
   'no-throw-literal': ERROR,
   // Disallow initializing variables to `undefined`
   'no-undef-init': ERROR,
@@ -484,7 +479,7 @@ const suggestions = {
   'no-undefined': ERROR,
   // Disallow dangling underscores in identifiers
   // RW: Polarizing, but 99% of time there's a better way to communicate. Ether
-  // write the var to be private in a scope, or use a more descriptive name.
+  // organize code so the var is actually private, or use a descriptive name.
   'no-underscore-dangle': ERROR,
   // Disallow ternary operators when simpler alternatives exist
   'no-unneeded-ternary': ERROR,
@@ -518,8 +513,6 @@ const suggestions = {
   // Disallow `with` statements
   'no-with': ERROR,
   // Require or disallow method and property shorthand syntax for object literals
-  // RW: Must ensure that we support the shorthand, but it's clear shorthand and
-  // should be used
   'object-shorthand': ERROR,
   // Enforce variables to be declared either together or separately in functions
   'one-var': [ERROR, 'never'],
@@ -534,9 +527,7 @@ const suggestions = {
   // Require `const` declarations for variables that are never reassigned after declared
   'prefer-const': ERROR,
   // Require destructuring from arrays and/or objects
-  // RW: Very particular, but enforces maximum consistency
-  // TODO: Check how this affects nested objects. Deep destructuring is hard to
-  // follow.
+  // RW: Strict, but enforces maximum consistency
   'prefer-destructuring': [
     ERROR,
     {
@@ -554,8 +545,6 @@ const suggestions = {
   // Disallow use of `Object.prototype.hasOwnProperty.call()` and prefer use of `Object.hasOwn()
   'prefer-object-has-own': ERROR,
   // Disallow using Object.assign with an object literal as the first argument and prefer the use of object spread instead
-  // RW: A great rule to enforce one of two equally readable ways of doing
-  // something
   'prefer-object-spread': ERROR,
   // Require using Error objects as Promise rejection reasons
   'prefer-promise-reject-errors': ERROR,
@@ -576,14 +565,12 @@ const suggestions = {
   // Disallow async functions which have no `await` expression
   'require-await': ERROR,
   // Enforce the use of `u` flag on RegExp
-  // RW: This feels like a really good rule, but is out of the ordinary on any
-  // environment I've worked on. It's autofixable, so... let's enable and see
-  // how it feels.
+  // RW: Although strict, it's autofixable. Let's enable and see how it feels.
   'require-unicode-regexp': ERROR,
   // Require generator functions to contain `yield`
   'require-yield': ERROR,
   // Enforce sorted import declarations within modules
-  // RW: Prefer more configurable import plugin
+  // RW: Unnecessary because of the more configurable import plugin
   'sort-imports': OFF,
   // Require object keys to be sorted
   'sort-keys': [
@@ -600,7 +587,7 @@ const suggestions = {
   // RW: Unnecessary due to one-var
   'sort-vars': OFF,
   // Enforce consistent spacing after the `//` or `/*` in a comment
-  // RW: Must allow for special `///` TypeScript comments
+  // RW: Allow special `///` TypeScript comments
   'spaced-comment': [ERROR, 'always', { markers: ['/'] }],
   // Require or disallow strict mode directives
   // RW: Strict mode is enforced by default for sourceType: module
@@ -668,7 +655,6 @@ const layoutAndFormatting = {
   // Enforce consistent linebreak style
   'linebreak-style': ERROR,
   // Require empty lines around comments
-  // RW: The defaults for this are great
   'lines-around-comment': ERROR,
   // Require or disallow an empty line between class members
   // RW: Allow for compact code in simple classes
@@ -690,7 +676,8 @@ const layoutAndFormatting = {
     },
   ],
   // Enforce a maximum number of statements allowed per line
-  // RW: Not sure if this is too restrictive, but let's try max 2 (to allow for if (x) return; guards).
+  // RW: Not sure if this is too restrictive, but let's try max 2 (to allow for
+  // if (x) return; guards).
   'max-statements-per-line': [ERROR, { max: 2 }],
   // Enforce newlines between operands of ternary expressions
   // RW: Handled by Prettier
@@ -705,7 +692,7 @@ const layoutAndFormatting = {
   // Disallow mixed spaces and tabs for indentation
   'no-mixed-spaces-and-tabs': ERROR,
   // Disallow multiple spaces
-  // RW: Disallow any precious manual aligning of comments or code
+  // RW: Disallow all precious manual aligning of comments or code
   'no-multi-spaces': ERROR,
   // Disallow multiple empty lines
   // RW: As above, no precious spacing
@@ -717,7 +704,6 @@ const layoutAndFormatting = {
   // Disallow whitespace before properties
   'no-whitespace-before-property': ERROR,
   // Enforce the location of single-line statements
-  // RW: Great rule!
   'nonblock-statement-body-position': ERROR,
   // Enforce consistent line breaks after opening and before closing braces
   // RW: Handled by Prettier
@@ -731,10 +717,6 @@ const layoutAndFormatting = {
   // Require or disallow padding within blocks
   'padded-blocks': [ERROR, 'never'],
   // Require or disallow padding lines between statements
-
-  // RW: These may be too strict, but let's see. AbNb doesn't set any of these.
-  // I think there also might be plugins that do a better job of setting
-  // linebreaks between types.
   'padding-line-between-statements': [
     ERROR,
     { blankLine: 'always', prev: ['cjs-import', 'import'], next: '*' },
@@ -803,8 +785,6 @@ const layoutAndFormatting = {
   // Require or disallow Unicode byte order mark (BOM)
   'unicode-bom': OFF,
   // Require parentheses around immediate `function` invocations
-  // RW: This is probably a rare case these days, but I've always/only seen the
-  // outside style
   'wrap-iife': [ERROR, 'outside'],
   // Require parenthesis around regex literals
   'wrap-regex': OFF,

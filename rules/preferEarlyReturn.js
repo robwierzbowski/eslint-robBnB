@@ -9,7 +9,7 @@ const preferEarlyReturnPluginConfig = {
 
 const rules = {
   // RW: Increases readability and maintainability by enforcing a guard
-  // conditional instead of wrapping the entire function body in a conditional.
+  // conditional instead of wrapping the entire function body in a conditional
   'prefer-early-return': ERROR,
 };
 

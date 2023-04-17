@@ -10,16 +10,16 @@ const reactPluginConfig = {
 const rules = {
   'boolean-prop-naming': ERROR,
   'button-has-type': ERROR,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'default-props-match-prop-types': OFF,
   'destructuring-assignment': [ERROR, 'always'],
   'display-name': OFF,
   'forbid-component-props': ERROR,
   'forbid-dom-props': OFF,
   'forbid-elements': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'forbid-foreign-prop-types': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'forbid-prop-types': OFF,
   'function-component-definition': [
     ERROR,
@@ -38,7 +38,7 @@ const rules = {
   'jsx-curly-newline': [ERROR, 'consistent'],
   'jsx-curly-spacing': [ERROR, { when: 'never', children: true }],
   'jsx-equals-spacing': [ERROR, 'never'],
-  // RW: .jsx is required for correct Vite/EsBuild processing
+  // RW: .jsx extensions are required for correct Vite/EsBuild processing
   'jsx-filename-extension': [
     ERROR,
     {
@@ -59,12 +59,11 @@ const rules = {
   'jsx-max-depth': [ERROR, { max: 15 }],
   'jsx-max-props-per-line': [ERROR, { maximum: 1, when: 'multiline' }],
   'jsx-newline': OFF,
-  // RW: Do we want to force useCallback for all arrow functions in functional
-  // components? Arrow functions are commonly used to wrap hook executions, and
-  // cannot be hoisted to an outer scope. The cost of creating a new function
-  // per render is likely minimal, but the cost of re-renders if the prop is
-  // passed deeply could be significant. I'm going to leave this on for now, but
-  // I could def turn it off.
+  // RW: Arrow functions are commonly used to wrap hook executions, and cannot
+  // be hoisted to an outer scope. The cost of creating a new function per
+  // render is likely minimal, but the cost of re-renders if the prop is passed
+  // deeply could be significant. I'm going to leave this on for now, but I
+  // could see turning it off if it is overly frictionful.
   'jsx-no-bind': ERROR,
   'jsx-no-comment-textnodes': ERROR,
   'jsx-no-constructed-context-values': ERROR,
@@ -78,16 +77,16 @@ const rules = {
   'jsx-no-target-blank': OFF,
   'jsx-no-undef': ERROR,
   'jsx-no-useless-fragment': ERROR,
-  // RW: Allow some terseness. TODO: Check if this causes prettier conflicts.
+  // RW: Allow some terseness
   'jsx-one-expression-per-line': [ERROR, { allow: 'single-child' }],
   'jsx-pascal-case': ERROR,
   'jsx-props-no-multi-spaces': ERROR,
-  // RW: Prop spreading is useful, especially with PropTypes and default props
-  // turned off (e.g., when passing groups of props or overriding a default set)
+  // RW: Prop spreading is useful (e.g., passing groups of props, overriding a
+  // default set), and the issues this rule attempts to fix are mitigated by
+  // TypeScript
   'jsx-props-no-spreading': OFF,
-  // RW: I do wish there was a `min` option for this one
+  // RW: I wish there was a `min` option for this one
   'jsx-sort-props': ERROR,
-  // RW: TODO: Check that this doesn't conflict with JSX whitespace rules
   'jsx-tag-spacing': ERROR,
   // RW: Unnecessary due to Vite JSX runtime auto-insertion
   'jsx-uses-react': OFF,
@@ -146,24 +145,24 @@ const rules = {
   'no-unstable-nested-components': ERROR,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'no-unused-class-component-methods': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'no-unused-prop-types': OFF,
   'no-unused-state': ERROR,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'no-will-update-set-state': OFF,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'prefer-es6-class': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'prefer-exact-props': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'prefer-read-only-props': OFF,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'prefer-stateless-function': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'prop-types': OFF,
   // RW: Unnecessary due to Vite JSX runtime auto-insertion
   'react-in-jsx-scope': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'require-default-props': OFF,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'require-optimization': OFF,
@@ -172,9 +171,9 @@ const rules = {
   'self-closing-comp': ERROR,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'sort-comp': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'sort-default-props': OFF,
-  // RW: Unnecessary prop type rule; using TypeScript instead
+  // RW: Using TypeScript instead of PropTypes
   'sort-prop-types': OFF,
   // RW: Unnecessary class component rule (react-prefer-function-component)
   'state-in-constructor': OFF,

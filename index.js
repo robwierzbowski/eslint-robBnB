@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-namespace
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
@@ -26,7 +27,7 @@ import {
   validateJsxNestingRules,
 } from './rules/validateJsxNesting.js';
 
-// Don't set more than we need to — this is modern JS!
+// Don't set more rules than we need to
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = 'true';
 
 // Returns the latest version of ES globals from the globals package
@@ -42,19 +43,17 @@ const latestESGlobals = () => {
 
 const languageOptions = {
   globals: {
-    // TODO: Make more specific globals for browser and node files (root/vite
+    // TODO: Make env specific globals for browser and node files (root/vite
     // files should have node globals)
     ...globals.browser,
     ...globals.node,
     ...latestESGlobals(),
   },
   // Vite uses ESBuild to transpile JS, but ESBuild doesn't expose an AST we can
-  // use for ESLint. It doesn't look like SWC has an ESLint parser either
-  // (although the barrier is lower). Although there's no TS in JS files, the TS
-  // parser should be able to parse 2020+ JS for us. Our other option is to
-  // introduce the Babel parser, config, and plugins, but that's too many tools
-  // doing the same job.
-  // References:
+  // use for ESLint. It doesn't look like SWC has an ESLint parser either.
+  // Although there's no TS in JS files, the TS parser should be able to parse
+  // 2020+ JS for us. Our other option is to introduce the Babel parser, but
+  // that's too many tools doing the same job. References:
   // https://github.com/evanw/esbuild/issues/1880
   // https://github.com/swc-project/swc/issues/246
   parser: typescriptParser,
@@ -63,7 +62,7 @@ const languageOptions = {
       jsx: true,
     },
     ecmaVersion: 'latest',
-    // Using the new auto-inserted JSX pragma
+    // Using the new JSX runtime auto insertion
     // https://typescript-eslint.io/architecture/parser/#jsxpragma
     jsxPragma: null,
     project: './tsconfig.json',
@@ -122,8 +121,8 @@ const config = [
     },
   },
 
-  // Prettier config must be last disable conflicting rules from previous
-  // objects
+  // Prettier config must be last disable any rules that conflicts with its
+  // formatting
   prettierConfig,
 ];
 

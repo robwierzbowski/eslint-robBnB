@@ -7,31 +7,31 @@ const unicornPluginConfig = {
   [prefix]: unicorn,
 };
 
-// eslint-plugin-unicorn is a collection of opinionated rules. Many of the rules
-// are useful best practices, but are covered by Prettier and core eslint rules,
-// or aren't beneficial enough to incur the eventual performance cost of
-// checking 100s of rules. Instead of including all rules and documenting the
-// reasoning for turning some off, I'm only going to include the rules I'm
-// enabling.
+// eslint-plugin-unicorn is a collection of opinionated rules. Many are best
+// practices but are already handled by core ESLint rules and Prettier, and
+// others aren't beneficial enough to incur the eventual performance cost of
+// their addition. Instead of listing all ubnicorn rules in this file and
+// documenting my reasoning for turning some off I'm only going to include the
+// rules I'm enabling; assume the reasons others weren't included are the
+// reasons above.
 const rules = {
   // RW: Included but disabled because it requires team specific configuration.
-  // A very useful tool if a codebase has an issue with abbreviations. Provides
-  // an option that enables autofix, so more useful than rules that prevent < 3
-  // letter identifiers.
+  // A very useful tool if a codebase has issues with abbreviations, and
+  // provides an option to autofix which makes it more useful than core rules.
   abbreviations: OFF,
   'no-object-as-default-parameter': ERROR,
   'no-unnecessary-await': ERROR,
   'prefer-array-flat': ERROR,
   'prefer-date-now': ERROR,
-  // RW: Although it introduces a new concept, nullish coalescing and other
-  // logical operators are terse and once familiar can be understood better than
-  // a ternary at a glance.
+  // RW: Although it introduces a new concept, once engineers are familiar with
+  // logical operators like nullish coalescing they can be understood better
+  // than a ternary at a glance
   'prefer-logical-operator-over-ternary': ERROR,
-  // RW: Testing or storing a boolean leads to more expected code than testing
-  // or storing a populated or empty array.
+  // RW: Testing or storing the boolean that regexp test returns leads to more
+  // understandable code than testing or storing an array of results
   'prefer-regexp-test': ERROR,
-  // RW: Provides a rule for arrays that matches the core prefer-spread rule
-  // that applies to objects.
+  // RW: Provides a rule for arrays that matches the core object prefer-spread
+  // rule
   'prefer-spread': ERROR,
 };
 

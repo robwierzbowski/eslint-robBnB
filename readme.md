@@ -11,6 +11,8 @@ Can't import most old configs, but I think you can import just rulesets
 (https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base/rules,
 etc)
 
+Use various plugin/config defaults instead of airbnb config.
+
 plugin-react supports new config, but the setup still feels kinda weird. Very
 close to no config but not quite. It also hides the plugin setup in its new
 default config. Props to them for supporting new config tho!
@@ -31,6 +33,7 @@ with a JSX framework and keep those rules to the minimum.
 In order to keep the static analysis performant, may want to mark some slower
 rules with a "CLI only" process env var. Then we can run a full suite pre
 commit, and a fast suite in editor.
+https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708
 
 Other plugins that might be interesting:
 
@@ -45,17 +48,7 @@ Other plugins that might be interesting:
 
 Must haves:
 
-- https://typescript-eslint.io/getting-started/ (next!)
-<!-- The repo must use jest and testing library before I configure these -->
+The repo must use jest and testing library before I configure these:
+
 - https://github.com/testing-library/eslint-plugin-testing-library
 - https://github.com/jest-community/eslint-plugin-jest
-
-### Desires
-
-No React / JSX Proptype rules, just TS rules Force const / arrow over func
-keywords Don't use .jsx -- we decided ages ago to use .js. In fact, it would be
-great if we could just force .tsx if the file has jsx in it
-
-### Unknowns
-
-Can we use various plugin/config defaults instead of airbnb config?

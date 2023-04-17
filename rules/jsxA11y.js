@@ -26,8 +26,6 @@ const listInteractiveRoles = [
   'treegrid',
 ];
 
-// RW: Many of the rules this plugin provides have documented recommended
-// configuration. These recommendations have been added wherever possible.
 const rules = {
   // Enforce all elements that require alternative text have meaningful
   // information to relay back to end user.
@@ -58,13 +56,9 @@ const rules = {
   'autocomplete-valid': ERROR,
   // Enforce a clickable non-interactive element has at least one keyboard event
   // listener.
-  // RW: This would not be necessary if we could forbid interaction on
-  // non-interactive elements
-  'click-events-have-key-events': ERROR,
+  // RW: Unnecessary because we forbid interaction on non-interactive elements
+  'click-events-have-key-events': OFF,
   // Enforce that a control (an interactive element) has a text label.
-  // RW: Including the full options object to override depth.
-  // TODO: Test if we can override depth without including the rest of the
-  // options object
   'control-has-associated-label': [
     ERROR,
     {
@@ -103,9 +97,8 @@ const rules = {
   // Enforce <img> alt prop does not contain the word "image", "picture", or "photo".
   'img-redundant-alt': ERROR,
   // Enforce that elements with interactive handlers like onClick must be focusable.
-  // RW: This would not be necessary if we could forbid interaction on
-  // non-interactive elements
-  'interactive-supports-focus': ERROR,
+  // RW: Unnecessary because we forbid interaction on non-interactive elements
+  'interactive-supports-focus': OFF,
   // Enforce that a label tag has a text label and an associated control.
   'label-has-associated-control': [
     ERROR,
@@ -128,16 +121,14 @@ const rules = {
   // Disallow aria-hidden="true" from being set on focusable elements.
   'no-aria-hidden-on-focusable': ERROR,
   // Enforce autoFocus prop is not used.
-  // RW: Check custom components as well
+  // RW: Check custom components against this rule as well
   'no-autofocus': [ERROR, { ignoreNonDOM: false }],
   // Enforce distracting elements are not used.
-  // RW: But we all love blink and marquee tbh
   'no-distracting-elements': ERROR,
   // Interactive elements should not be assigned non-interactive roles.
   'no-interactive-element-to-noninteractive-role': ERROR,
   // Non-interactive elements should not be assigned mouse or keyboard event
   // listeners.
-  // RW: Docs contain recommended settings that are not the default? Odd.
   'no-noninteractive-element-interactions': [
     ERROR,
     { handlers: interactiveHandlers },
