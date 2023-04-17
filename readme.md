@@ -38,7 +38,6 @@ https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708
 Other plugins that might be interesting:
 
 - https://github.com/microsoft/eslint-plugin-sdl
-- https://github.com/EvgenyOrekhov/eslint-config-hardcore
 - some rules from https://github.com/Shopify/web-configs/tree/main/packages/eslint-plugin
 - https://github.com/buildo/eslint-plugin-no-loops (YESSS, although i've read for-of loops can be optimized by the engine in ways iterator methods can't be)
 - https://github.com/bmatcuk/eslint-plugin-postcss-modules
@@ -48,7 +47,8 @@ Other plugins that might be interesting:
 
 Must haves:
 
-The repo must use jest and testing library before I configure these:
+The repo must use ~jest~ and testing library before I configure these. But wait, there's a new node native test runner! Let's write tests with that in this repo.
+https://glebbahmutov.com/blog/trying-node-test-runner/
 
+- ~https://github.com/jest-community/eslint-plugin-jest~
 - https://github.com/testing-library/eslint-plugin-testing-library
-- https://github.com/jest-community/eslint-plugin-jest
