@@ -10,6 +10,11 @@ import {
 } from './rules/import.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
 import {
+  packageJsonPluginConfig,
+  packageJsonProcessor,
+  packageJsonRules,
+} from './rules/packageJson.js';
+import {
   preferArrowPluginConfig,
   preferArrowRules,
 } from './rules/preferArrow.js';
@@ -75,6 +80,17 @@ const languageOptions = {
 const config = [
   {
     ignores: ['dist/*'],
+  },
+
+  {
+    files: ['package.json'],
+    plugins: {
+      ...packageJsonPluginConfig,
+    },
+    processor: packageJsonProcessor,
+    rules: {
+      ...packageJsonRules,
+    },
   },
 
   {

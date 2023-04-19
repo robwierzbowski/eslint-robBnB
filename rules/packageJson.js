@@ -1,6 +1,3 @@
-// TODO: This file currently isn't applyable because I can't get a parser to
-// parse JSON well in the new config. Find a good parser tutorial for the flat
-// config and re-implement.
 import packageJson from 'eslint-plugin-package-json';
 import { ERROR, addPrefix } from './shared.js';
 
@@ -9,6 +6,8 @@ const prefix = 'package-json';
 const packageJsonPluginConfig = {
   [prefix]: packageJson,
 };
+
+const packageJsonProcessor = packageJson.processors['.json'];
 
 const rules = {
   // RW: Enforces a standardized package.json key order, improving
@@ -23,4 +22,4 @@ const rules = {
 
 const packageJsonRules = addPrefix(prefix, rules);
 
-export { packageJsonPluginConfig, packageJsonRules };
+export { packageJsonPluginConfig, packageJsonProcessor, packageJsonRules };
