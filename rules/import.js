@@ -126,7 +126,15 @@ const importStyleGuide = {
   // RW: This style is becoming less and less common. We can disable at point of
   // use for the few cases that it's still necessary (e.g., self executing
   // polyfills)
-  'no-unassigned-import': ERROR,
+  'no-unassigned-import': [
+    ERROR,
+    {
+      allow: [
+        // Side effect file that adds RTL matchers to Jest globals
+        '@testing-library/jest-dom',
+      ],
+    },
+  ],
   // Enforce a convention in module import order
   order: [
     ERROR,
