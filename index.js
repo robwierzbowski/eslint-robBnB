@@ -8,6 +8,7 @@ import {
   importRules,
   importSettings,
 } from './rules/import.js';
+import { jestPluginConfig, jestRules } from './rules/jest.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
 import {
   packageJsonPluginConfig,
@@ -48,10 +49,9 @@ const latestESGlobals = () => {
 
 const languageOptions = {
   globals: {
-    // TODO: Make env specific globals for browser, test, and node files
-    // (root/vite files should have node globals)
+    // TODO: Make env specific globals for browser and node files (root/vite
+    // files should have node globals)
     ...globals.browser,
-    ...globals.jest,
     ...globals.node,
     ...latestESGlobals(),
   },
@@ -82,6 +82,7 @@ const config = [
     ignores: ['dist/*'],
   },
 
+  // package.json file
   {
     files: ['package.json'],
     plugins: {
@@ -93,6 +94,7 @@ const config = [
     },
   },
 
+  // General JavaScript files
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
@@ -128,6 +130,24 @@ const config = [
     },
   },
 
+  // Test files
+  {
+    files: ['**/*.test.js', '**/*.test.ts', '**/*.test.tsx'],
+    languageOptions: {
+      globals: {
+        ...languageOptions.globals,
+        ...globals.jest,
+      },
+    },
+    plugins: {
+      ...jestPluginConfig,
+    },
+    rules: {
+      ...jestRules,
+    },
+  },
+
+  // TypeScript files
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
     plugins: {
