@@ -26,6 +26,10 @@ import {
 import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
 import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
+import {
+  testingLibraryPluginConfig,
+  testingLibraryRules,
+} from './rules/testingLibrary.js';
 import { typescriptPluginConfig, typescriptRules } from './rules/typescript.js';
 import { unicornPluginConfig, unicornRules } from './rules/unicorn.js';
 import {
@@ -141,9 +145,11 @@ const config = [
     },
     plugins: {
       ...jestPluginConfig,
+      ...testingLibraryPluginConfig,
     },
     rules: {
       ...jestRules,
+      ...testingLibraryRules,
     },
   },
 
