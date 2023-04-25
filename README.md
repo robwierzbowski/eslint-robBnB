@@ -18,10 +18,6 @@ References: [blog post](https://eslint.org/blog/2022/08/new-config-system-part-1
 
 - [ ] Extract into its own package and add install/usage section
 - [ ] In order to keep in-editor linting performant, I may want to move slower rules behind a CLI-only flag. Rules [can be benchmarked](https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708) by prefixing the script call with `TIMING={Number of rules to show}`.
-- [ ] Add testing framework rules
-  - https://github.com/jest-community/eslint-plugin-jest
-  - https://www.npmjs.com/package/eslint-plugin-jest-formatting
-  - https://github.com/testing-library/eslint-plugin-testing-library
 
 ### Other plugins to vet
 
