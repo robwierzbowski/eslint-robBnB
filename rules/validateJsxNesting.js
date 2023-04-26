@@ -1,5 +1,5 @@
 import validateJsxNesting from 'eslint-plugin-validate-jsx-nesting';
-import { ERROR, addPrefix } from './shared.js';
+import { ERROR, addPrefix } from '../utils.js';
 
 const prefix = 'validate-jsx-nesting';
 
@@ -8,7 +8,8 @@ const validateJsxNestingPluginConfig = {
 };
 
 const rules = {
-  // RW: Ensures that JSX matches rendered HTML structure in the browser
+  // Ensures that HTML in JSX is valid and will not be mangled/corrected by the
+  // browser
   'no-invalid-jsx-nesting': ERROR,
 };
 

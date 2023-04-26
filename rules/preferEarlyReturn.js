@@ -1,5 +1,5 @@
 import preferEarlyReturn from '@regru/eslint-plugin-prefer-early-return';
-import { ERROR, addPrefix } from './shared.js';
+import { ERROR, addPrefix } from '../utils.js';
 
 const prefix = 'prefer-early-return';
 
@@ -8,8 +8,8 @@ const preferEarlyReturnPluginConfig = {
 };
 
 const rules = {
-  // RW: Increases readability and maintainability by enforcing a guard
-  // conditional instead of wrapping the entire function body in a conditional
+  // Increases readability and maintainability by enforcing a guard conditional
+  // instead of wrapping the entire function body in a conditional
   'prefer-early-return': ERROR,
 };
 

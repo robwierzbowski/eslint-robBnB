@@ -8,8 +8,8 @@ const typescriptPluginConfig = {
 
 // The plugin provided rules turn off useful core rules, with the explanation
 // that they may cause issues in TS repositories. Because these core rules are
-// very valuable, let's avoid disabling them and see if we run into any issues
-// in practice.
+// valuable, let's avoid disabling them and see if we run into any issues in
+// practice.
 const onlyTypescriptRules = rules => {
   const isTypescriptRule = ([key]) => /^@typescript-eslint/u.test(key);
 

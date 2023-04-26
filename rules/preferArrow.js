@@ -1,5 +1,5 @@
 import preferArrow from 'eslint-plugin-prefer-arrow';
-import { ERROR, addPrefix } from './shared.js';
+import { ERROR, addPrefix } from '../utils.js';
 
 const prefix = 'prefer-arrow';
 
@@ -11,9 +11,9 @@ const rules = {
   'prefer-arrow-functions': [
     ERROR,
     {
-      // RW: Allow function shorthand in classes
+      // Allow function shorthand in classes
       classPropertiesAllowed: false,
-      // RW: Allow function shorthand in objects
+      // Allow function shorthand in objects
       disallowPrototype: false,
       singleReturnOnly: false,
     },
