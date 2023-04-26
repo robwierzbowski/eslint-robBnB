@@ -61,10 +61,9 @@ const languageOptions = {
     ...latestESGlobals(),
   },
   // Vite uses ESBuild to transpile JS, but ESBuild doesn't expose an AST we can
-  // use for ESLint. It doesn't look like SWC has an ESLint parser either.
-  // Although there's no TS in JS files, the TS parser should be able to parse
-  // 2020+ JS for us. Our other option is to introduce the Babel parser, but
-  // that's too many tools doing the same job. References:
+  // use for ESLint. But, we can use the TS parser to parse 2020+ JS in both JS
+  // and TS files. The other option is to introduce the Babel parser, but that's
+  // too many tools doing the same job. Reference:
   // https://github.com/evanw/esbuild/issues/1880
   // https://github.com/swc-project/swc/issues/246
   parser: typescriptParser,
@@ -99,7 +98,7 @@ const config = [
     },
   },
 
-  // General JavaScript files
+  // JavaScript-based files
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
@@ -165,7 +164,7 @@ const config = [
     },
   },
 
-  // Prettier config must be last disable any rules that conflicts with its
+  // Prettier config must be last disable any rules that conflict with its
   // formatting
   prettierConfig,
 ];
