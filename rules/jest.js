@@ -125,7 +125,9 @@ const rules = {
   // Require a message for toThrow()
   'require-to-throw-message': ERROR,
   // Require test cases and hooks to be inside a describe block
-  'require-top-level-describe': ERROR,
+  // RW: It's pleasant to write file-level before* and after* hooks at the top
+  // scope of the file.
+  'require-top-level-describe': OFF,
   // Enforce valid describe() callback
   'valid-describe-callback': ERROR,
   // Enforce valid expect() usage
