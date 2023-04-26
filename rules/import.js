@@ -175,7 +175,6 @@ const importSettings = {
     // to use the new flat config. This may not be necessary in future releases.
     // https://github.com/import-js/eslint-plugin-import/issues/2556#issuecomment-1419518561
     espree: ['.js', '.jsx'],
-    // TODO: Does this need to move into the block below?
     '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
   },
   'import/resolver': {

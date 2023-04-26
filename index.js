@@ -53,8 +53,9 @@ const latestESGlobals = () => {
 
 const languageOptions = {
   globals: {
-    // TODO: Make env specific globals for browser and node files (root/vite
-    // files should have node globals)
+    // Adding both browser and node globals for all files for convenience. Each
+    // project will have its own organization of browser files and node files
+    // and can override this setting if desired.
     ...globals.browser,
     ...globals.node,
     ...latestESGlobals(),
