@@ -26,6 +26,10 @@ const listInteractiveRoles = [
   'treegrid',
 ];
 
+// Note that these rules cover a small subset of a11y issues. For increased
+// automated coverage, linting should be paired with a tool that analyzes the
+// rendered HTML axe-core-npm/react or jest-axe. Complete coverage is only
+// possible through manual testing by people with a11y expertise.
 const rules = {
   // Enforce all elements that require alternative text have meaningful
   // information to relay back to end user.
