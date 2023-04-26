@@ -136,7 +136,7 @@ const config = [
 
   // Test files
   {
-    files: ['**/*.test.js', '**/*.test.ts', '**/*.test.tsx'],
+    files: ['**/*.test.js', '**/*.test.ts', '**/*.test.tsx', '**/test/**'],
     languageOptions: {
       globals: {
         ...languageOptions.globals,
