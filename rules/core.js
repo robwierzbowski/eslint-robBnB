@@ -255,8 +255,8 @@ const suggestions = {
   'no-extra-semi': ERROR,
   // Disallow leading or trailing decimal points in numeric literals
   'no-floating-decimal': ERROR,
-  // Disallow assignments to native objects or read-only global variables
-  // TODO: We'll probably need to alter this to allow it in test environments
+  // Disallow assignments to native objects or read-only global variables TODO:
+  // We might need to allow this in test environments
   'no-global-assign': ERROR,
   // Disallow shorthand type conversions
   'no-implicit-coercion': [
@@ -604,12 +604,12 @@ const suggestions = {
 // https://eslint.org/docs/latest/rules/#layout--formatting
 const layoutAndFormatting = {
   // Enforce linebreaks after opening and before closing array brackets
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   'array-bracket-newline': OFF,
   // Enforce consistent spacing inside array brackets
   'array-bracket-spacing': [ERROR, 'never'],
   // Enforce line breaks after each array element
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   'array-element-newline': OFF,
   // Require parentheses around arrow function arguments
   'arrow-parens': [ERROR, 'as-needed'],
@@ -636,7 +636,7 @@ const layoutAndFormatting = {
   // Enforce line breaks between arguments of a function call
   'function-call-argument-newline': [ERROR, 'consistent'],
   // Enforce consistent line breaks inside function parentheses
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   'function-paren-newline': OFF,
   // Enforce consistent spacing around `*` operators in generator functions
   'generator-star-spacing': ERROR,
@@ -680,7 +680,7 @@ const layoutAndFormatting = {
   // if (x) return; guards).
   'max-statements-per-line': [ERROR, { max: 2 }],
   // Enforce newlines between operands of ternary expressions
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   'multiline-ternary': OFF,
   // Enforce or disallow parentheses when invoking a constructor with no arguments
   'new-parens': ERROR,
@@ -706,7 +706,7 @@ const layoutAndFormatting = {
   // Enforce the location of single-line statements
   'nonblock-statement-body-position': ERROR,
   // Enforce consistent line breaks after opening and before closing braces
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   'object-curly-newline': OFF,
   // Enforce consistent spacing inside braces
   'object-curly-spacing': [ERROR, 'always'],
@@ -756,7 +756,7 @@ const layoutAndFormatting = {
     { blankLine: 'always', prev: 'while', next: '*' },
   ],
   // Enforce the consistent use of either backticks, double, or single quotes
-  // RW: Handled by Prettier
+  // RW: Unnecessary, handled by Prettier
   quotes: [ERROR, 'single'],
   // Enforce spacing between rest and spread operators and their expressions
   'rest-spread-spacing': ERROR,
