@@ -18,11 +18,4 @@ References: [blog post](https://eslint.org/blog/2022/08/new-config-system-part-1
 
 - [ ] Extract into its own package and add install/usage section
 - [ ] In order to keep in-editor linting performant, I may want to move slower rules behind a CLI-only flag. Rules [can be benchmarked](https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708) by prefixing the script call with `TIMING={Number of rules to show}`.
-
-### Other plugins to vet
-
-- https://github.com/microsoft/eslint-plugin-sdl
-- https://github.com/Shopify/web-configs/tree/main/packages/eslint-plugin. Contains some potentially useful custom rules, but is a rather large package with lots of rules I don't think are useful.
-- https://github.com/buildo/eslint-plugin-no-loops. Personally I would love this for readability, but I've read for-of loops are better optimized by the JS engine.
-- https://github.com/bmatcuk/eslint-plugin-postcss-modules
-- https://github.com/SonarSource/eslint-plugin-sonarjs. Finds some edge case bugs, but they seem relatively uncommon. The return may not be worth the investment/perf penalty of more rules.
+- [ ] Stylelint? Are there any alternatives to stylelint?
