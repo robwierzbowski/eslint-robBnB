@@ -1,5 +1,5 @@
 import confusingBrowserGlobals from 'confusing-browser-globals';
-import { ERROR, OFF, WARN } from '../utils.js';
+import { ERROR, OFF, WARN } from '../utils/index.js';
 
 // These rules relate to possible logic errors in code
 // https://eslint.org/docs/latest/rules#possible-problems

@@ -1,5 +1,5 @@
 import preferArrow from 'eslint-plugin-prefer-arrow';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'prefer-arrow';
 

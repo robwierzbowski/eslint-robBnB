@@ -1,5 +1,5 @@
 import { default as reactPFC } from 'eslint-plugin-react-prefer-function-component';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'react-pfc';
 

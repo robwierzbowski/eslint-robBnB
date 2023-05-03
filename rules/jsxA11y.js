@@ -1,5 +1,5 @@
 import jsxA11ty from 'eslint-plugin-jsx-a11y';
-import { ERROR, OFF, addPrefix } from '../utils.js';
+import { ERROR, OFF, addPrefix } from '../utils/index.js';
 
 const prefix = 'jsx-a11y';
 

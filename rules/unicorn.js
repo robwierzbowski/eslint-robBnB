@@ -1,5 +1,5 @@
 import unicorn from 'eslint-plugin-unicorn';
-import { ERROR, OFF, addPrefix } from '../utils.js';
+import { ERROR, OFF, addPrefix } from '../utils/index.js';
 
 const prefix = 'unicorn';
 

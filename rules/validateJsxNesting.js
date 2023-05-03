@@ -1,5 +1,5 @@
 import validateJsxNesting from 'eslint-plugin-validate-jsx-nesting';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'validate-jsx-nesting';
 

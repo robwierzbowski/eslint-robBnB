@@ -1,5 +1,5 @@
 import packageJson from 'eslint-plugin-package-json';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'package-json';
 

@@ -1,5 +1,5 @@
 import preferEarlyReturn from '@regru/eslint-plugin-prefer-early-return';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'prefer-early-return';
 

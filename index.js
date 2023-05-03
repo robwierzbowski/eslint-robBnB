@@ -2,6 +2,7 @@
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
+import { latestESGlobals } from './utils/index.js';
 import { coreRules } from './rules/core.js';
 import {
   importPluginConfig,
@@ -40,17 +41,6 @@ import {
 // Don't set more rules than we need to
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = 'true';
 
-// Returns the latest version of ES globals from the globals package
-const latestESGlobals = () => {
-  const esKeyRegex = /^es20\d{2}$/u;
-  const latestESKey = Object.keys(globals)
-    .filter(key => key.match(esKeyRegex))
-    .sort()
-    .pop();
-
-  return globals[latestESKey];
-};
-
 const languageOptions = {
   globals: {
     // Adding both browser and node globals for all files for convenience. Each
@@ -58,7 +48,7 @@ const languageOptions = {
     // and can override this setting if desired.
     ...globals.browser,
     ...globals.node,
-    ...latestESGlobals(),
+    ...latestESGlobals(globals),
   },
   // Vite uses ESBuild to transpile JS, but ESBuild doesn't expose an AST we can
   // use for ESLint. But, we can use the TS parser to parse 2020+ JS in both JS

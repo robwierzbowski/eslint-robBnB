@@ -1,5 +1,5 @@
 import reactHooks from 'eslint-plugin-react-hooks';
-import { ERROR, addPrefix } from '../utils.js';
+import { ERROR, addPrefix } from '../utils/index.js';
 
 const prefix = 'react-hooks';
 

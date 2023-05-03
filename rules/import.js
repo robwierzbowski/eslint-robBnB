@@ -1,5 +1,5 @@
 import importPlugin from 'eslint-plugin-i';
-import { ERROR, OFF, addPrefix } from '../utils.js';
+import { ERROR, OFF, addPrefix } from '../utils/index.js';
 
 const prefix = 'import';
 
