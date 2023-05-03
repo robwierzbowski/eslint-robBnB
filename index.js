@@ -26,7 +26,10 @@ import {
 } from './rules/preferEarlyReturn.js';
 import { reactPluginConfig, reactRules, reactSettings } from './rules/react.js';
 import { reactHooksPluginConfig, reactHooksRules } from './rules/reactHooks.js';
-import { reactPFCPluginConfig, reactPFCRules } from './rules/reactPFC.js';
+import {
+  reactPreferFunctionComponentPluginConfig,
+  reactPreferFunctionComponentRules,
+} from './rules/reactPreferFunctionComponent.js';
 import {
   testingLibraryPluginConfig,
   testingLibraryRules,
@@ -101,7 +104,7 @@ const config = [
       ...preferArrowPluginConfig,
       ...preferEarlyReturnPluginConfig,
       ...reactHooksPluginConfig,
-      ...reactPFCPluginConfig,
+      ...reactPreferFunctionComponentPluginConfig,
       ...reactPluginConfig,
       ...unicornPluginConfig,
       ...validateJsxNestingPluginConfig,
@@ -113,7 +116,7 @@ const config = [
       ...preferArrowRules,
       ...preferEarlyReturnRules,
       ...reactHooksRules,
-      ...reactPFCRules,
+      ...reactPreferFunctionComponentRules,
       ...reactRules,
       ...unicornRules,
       ...validateJsxNestingRules,
