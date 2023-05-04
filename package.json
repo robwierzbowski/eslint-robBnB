@@ -26,5 +26,8 @@
     "eslint-plugin-unicorn": "^46.0.0",
     "eslint-plugin-validate-jsx-nesting": "^0.1.0"
   },
+  "peerDependencies": {
+    "eslint": "^8.37.0"
+  },
   "type": "module"
 }
