@@ -14,8 +14,35 @@ This package uses the new, currently pre-release ESLint flat config. End use of 
 
 References: [blog post](https://eslint.org/blog/2022/08/new-config-system-part-1/), [new docs](https://eslint.org/docs/latest/use/configure/configuration-files-new), [TypeScript integration](https://stackoverflow.com/questions/74237042/how-to-correctly-configure-the-parser-plugins-with-eslints-new-flat-config)
 
-## Upcoming changes
+## Setup
 
-- [ ] Extract into its own package and add install/usage section
-- [ ] In order to keep in-editor linting performant, I may want to move slower rules behind a CLI-only flag. Rules [can be benchmarked](https://javascript.plainenglish.io/how-to-benchmark-eslint-rules-e262b7690708) by prefixing the script call with `TIMING={Number of rules to show}`.
-- [ ] Stylelint? Are there any alternatives to stylelint?
+```js
+  // package.json file
+  {
+    files: ['package.json'],
+  },
+
+  // all
+  {
+    files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    languageOptions,
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
+  },
+
+  {
+    files: ['**/*.test.js', '**/*.test.ts', '**/*.test.tsx', '**/test/**'],
+    languageOptions: {
+      globals: {
+        ...languageOptions.globals,
+        ...globals.jest,
+      },
+    },
+  },
+
+  // TypeScript files
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
+  },
+```
