@@ -96,4 +96,4 @@ const typescript = {
   },
 };
 
-export { javaScript, packageJson, test, typescript };
+export { javaScriptConfig, packageJsonConfig, testConfig, typescriptConfig };
