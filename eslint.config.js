@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-namespace
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
+import globals from 'globals';
 import {
   javaScriptConfig,
   latestESGlobals,
@@ -8,15 +9,6 @@ import {
   testConfig,
   typescriptConfig,
 } from './index.js';
-import globals from 'globals';
-
-console.log({
-  javaScriptConfig,
-  // latestESGlobals,
-  // packageJsonConfig,
-  // testConfig,
-  // typescriptConfig,
-});
 
 // Don't set more rules than we need to
 process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = 'true';
@@ -95,4 +87,5 @@ const config = [
   prettierConfig,
 ];
 
+// eslint-disable-next-line import/no-default-export
 export default config;
