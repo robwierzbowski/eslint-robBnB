@@ -36,7 +36,7 @@ import {
   validateJsxNestingRules,
 } from './rules/validateJsxNesting.js';
 
-const javaScript = {
+const javaScriptConfig = {
   plugins: {
     ...importPluginConfig,
     ...jsxA11yPluginConfig,
@@ -66,7 +66,7 @@ const javaScript = {
   },
 };
 
-const packageJson = {
+const packageJsonConfig = {
   plugins: {
     ...packageJsonPluginConfig,
   },
@@ -76,7 +76,7 @@ const packageJson = {
   },
 };
 
-const test = {
+const testConfig = {
   plugins: {
     ...jestPluginConfig,
     ...testingLibraryPluginConfig,
@@ -87,7 +87,7 @@ const test = {
   },
 };
 
-const typescript = {
+const typescriptConfig = {
   plugins: {
     ...typescriptPluginConfig,
   },
