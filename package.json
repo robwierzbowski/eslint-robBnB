@@ -1,0 +1,13 @@
+{
+  "name": "eslint-robbnb",
+  "version": "0.0.0",
+  "description": "ESLint rules for modern JavaScript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robwierzbowski/eslint-robBnB.git"
+  },
+  "author": "Rob Wierzbowski",
+  "license": "MIT",
+  "homepage": "https://github.com/robwierzbowski/eslint-robBnB#readme"
+}
