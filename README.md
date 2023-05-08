@@ -6,15 +6,15 @@ This package provides linting configuration and rulesets that help engineers wri
 
 The configuration focuses on modern JavaScript, TypeScript, and React. It avoids setting rules for legacy patterns (e.g., class components, PropTypes), deprecated APIs, and direct DOM manipulations.
 
-The configuration includes opinionated rules that improve the consistency of applications by enforcing one modern, simplistic implementation of a pattern when multiple exist. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for each` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but verbose alternatives are accessible to a wider audience. Autofixable rules are preferred, allowing automatic code transformation on save with a properly configured IDE.
+The configuration includes opinionated rules that improve the consistency of applications by enforcing one implementation of a pattern when multiple exist. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for each` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but alternatives are more easily understood by most engineers. Autofixable rules are preferred, allowing automatic code transformation on save with a properly configured IDE.
 
 ### Why not [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)?
 
-For years engineers have extended AirBnB's config, and while it's a fantastic starting point it is somewhat outdated and permissive. Because of its broad usage the maintainers are reluctant to forbid legacy code patterns like React class components, and have avoided useful rules that would create breaking changes. This package uses AirBnB as a reference but follows the more focused and restrictive approach described above.
+For years engineers have extended AirBnB's config, and while it's a fantastic starting point it's somewhat outdated and permissive. The maintainers are reluctant to forbid legacy code patterns like React class components, and have avoided enabling useful rules that would create breaking changes. This package uses AirBnB as a reference but follows a more focused and restrictive approach.
 
 ## Plugins
 
-RobBnB sets rules from the following plugins:
+This package configures and sets rules from the following plugins:
 
 - [@regru/eslint-plugin-prefer-early-return](https://github.com/regru/eslint-plugin-prefer-early-return)
 - [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)
@@ -32,7 +32,7 @@ RobBnB sets rules from the following plugins:
 
 ## Install
 
-Install the config and its required peer dependencies.
+Install the package and its required peer dependencies.
 
 ```sh
 npm install eslint@^8 eslint-robbnb
@@ -42,7 +42,7 @@ _RW side note: I haven't published to NPM yet, for reasons, so currently you hav
 
 ## Expectations
 
-These rules expect your application or tool to be configured in the following ways. If it isn't you may need to alter related rules.
+These rules expect your repository to be configured in the following ways. If it isn't you may need to alter related rules.
 
 - If using React, your bundler is configured to automatically insert the [new JSX transform](https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). Bundlers like [Vite](https://vitejs.dev/) do this by default.
 - If type safety is desired, you're using TypeScript. All PropType linters are disabled.
