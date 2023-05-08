@@ -6,7 +6,7 @@ This package provides linting configuration and rulesets that help engineers wri
 
 The configuration focuses on modern JavaScript, TypeScript, and React. It avoids setting rules for legacy patterns (e.g., class components, PropTypes), deprecated APIs, and direct DOM manipulations.
 
-It contains opinionated rules that improve the consistency of applications by enforcing one modern, simplistic method of implementing common patterns. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but verbose alternatives are often accessible to a wider audience. Autofixable rules are preferred, allowing automatic code transformation on save with a properly configured IDE.
+The configuration includes opinionated rules that improve the consistency of applications by enforcing one modern, simplistic implementation of a pattern when multiple exist. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for each` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but verbose alternatives are accessible to a wider audience. Autofixable rules are preferred, allowing automatic code transformation on save with a properly configured IDE.
 
 ### Why not [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)?
 
