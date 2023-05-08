@@ -1,7 +1,6 @@
-// Don't set more rules than we need to
-process.env.ESLINT_CONFIG_PRETTIER_NO_DEPRECATED = 'true';
-
-// eslint-disable-next-line import/no-namespace
+// In order to be used in new eslint config, the entire typescript parser must
+// be imported as an object
+//  eslint-disable-next-line import/no-namespace
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
