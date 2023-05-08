@@ -40,11 +40,19 @@ npm install eslint@^8 eslint-robbnb
 
 _RW side note: I haven't published to NPM yet, for reasons, so currently you have to install directly from this repository._
 
+## Expectations
+
+These rules expect your application or tool to be configured in the following ways. If it isn't you may need to alter related rules.
+
+- If using React, your bundler is configured to automatically insert the [new JSX transform](https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). Bundlers like [Vite](https://vitejs.dev/) do this by default.
+- If type safety is desired, you're using TypeScript. All PropType linters are disabled.
+- Your are using [Prettier](https://prettier.io/). Many useful rules are disabled with the expectation that Prettier makes them unnecessary.
+
 ## Usage
 
-This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via strings, we now add and manipulate configuration as JS objects.
+This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, we now reference and manipulate configuration as JS objects.
 
-The package exposes configuration for JavaScript-based files, package.json files, TypeScript, and [Jest](https://jestjs.io/)/[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) files. Each config must be spread into a flat config object that specifies the files that config will be applied to.
+The package exposes configuration for JavaScript-based files, package.json files, TypeScript files, and [Jest](https://jestjs.io/)/[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) files. Each config must be spread into a flat config object configured to apply to these the relevant files in your repository.
 
 ```js
 // eslint.config.js
@@ -57,7 +65,7 @@ import {
 } from 'eslint-robbnb';
 
 const languageOptions = {
-  // Settings for globals, parsers, and other rulesets.
+  // Configuration for parsers, globals, etc.
 };
 
 const config = [
@@ -70,7 +78,7 @@ const config = [
 
   // All JavaScript-based files
   {
-    files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
     ...javaScriptConfig,
   },
@@ -87,13 +95,79 @@ const config = [
     ...testConfig,
   },
 
-  // RobBnB rules are intended to be used with Prettier. Adding prettier config
-  // last will override any rules that might conflict with prettier settings.
+  // Adding Prettier config last will override any rules that might conflict
+  // with Prettier settings
   prettierConfig,
 ];
 
-// Import settings prefer named exports; an exception must be made for most
+// These rules prefer named exports; disabling the rule is necessary for some
 // config files
 //eslint-disable-next-line import/no-default-export
 export default config;
+```
+
+For a complete example see [this package's eslint.config.js file](https://github.com/robwierzbowski/eslint-robBnB/blob/main/eslint.config.js).
+
+### Overriding configuration and rules
+
+Each configuration object contains a `rules` object, in addition to `plugin`, `processor`, and `settings` objects where needed. To add additional ESLint rules or override existing ones you must to alter the `rules` object. You can log the config objects for a better understanding of what they set and what you can manipulate. This is a little cumbersome — as this project and the flat config evolve I may find terser ways to apply and add rules.
+
+Two possible methods for adding new rules are:
+
+#### Add a new object to the cascade and let ESLint deep merge the configurations
+
+ESLint deep merges every configuration object who's file glob patterns match a file being linted.
+
+_Note: maybe I should bundle the whole config with globs included, and trust that most people are using standard file extensions. The package.json config would maybe need some additional config to work in monorepos._
+
+```js
+import { javaScriptConfig } from 'eslint-robbnb';
+
+const languageOptions = {
+  // Your language options
+};
+
+const config = [
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    ...javaScriptConfig,
+  },
+
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    languageOptions,
+    rules: {
+      // Your additional rules
+      'react/no-did-update-set-state': 'error',
+    },
+  },
+];
+```
+
+#### Deep merge the configurations yourself
+
+Using a tool like [defaults](https://github.com/sindresorhus/node-defaults):
+
+```js
+import { javaScriptConfig } from 'eslint-robbnb';
+import defaults from 'defaults';
+
+const languageOptions = {
+  // Your language options
+};
+
+const myJavaScriptConfig = defaults(javaScriptConfig, {
+  rules: {
+    // Your additional rules
+    'react/no-did-update-set-state': 'error',
+  },
+});
+
+const config = [
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    languageOptions,
+    ...myJavaScriptConfig,
+  },
+];
 ```

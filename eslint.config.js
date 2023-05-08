@@ -45,7 +45,7 @@ const config = [
 
   // JavaScript files
   {
-    files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
     linterOptions: {
       // Recommended; this throws a warning when code contains disable comments
@@ -77,7 +77,7 @@ const config = [
   prettierConfig,
 ];
 
-// These rules prefer named exports; disabling the rule is necessary in many
+// These rules prefer named exports; disabling the rule is necessary for some
 // third party integrations / config files
 // eslint-disable-next-line import/no-default-export
 export default config;
