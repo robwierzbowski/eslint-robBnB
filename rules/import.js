@@ -70,8 +70,8 @@ const importStyleGuide = {
   // Unnecessary, we enforce named exports
   'no-anonymous-default-export': OFF,
   // Named exports create more consistent and searchable code. We can add an
-  // `eslint-disable-next-line` comment in settings files and similar third
-  // party integrations that require default exports.
+  // `eslint-disable-next-line` comment in third party integrations (e.g.,
+  // config files) that require default exports.
   'no-default-export': ERROR,
   // Unnecessary, handled by ESLint core
   'no-duplicates': OFF,

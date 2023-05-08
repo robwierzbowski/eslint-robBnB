@@ -1,6 +1,6 @@
-// In order to be used in new eslint config, the entire typescript parser must
-// be imported as an object
-//  eslint-disable-next-line import/no-namespace
+// In order to be used in new ESLint config, the entire TypeScript parser module
+// must be imported as an object
+// eslint-disable-next-line import/no-namespace
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
@@ -14,20 +14,20 @@ import {
 
 const languageOptions = {
   globals: {
-    // Adding both browser and node globals to all files for convenience
+    // Adding browser and node globals to all files for convenience
     ...globals.browser,
     ...globals.node,
     ...latestESGlobals(globals),
   },
-  // We can use the TS parser to parse 2020+ JS in both JS and TS files for
-  // convenience
+  // For reduced complexity we can ignore Babel and use typescript/parser to
+  // parse both TS and modern JS files
   parser: typescriptParser,
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 'latest',
-    // Config for using the new JSX runtime auto insertion
+    // Expect that apps are using the new JSX runtime auto insertion
     // https://typescript-eslint.io/architecture/parser/#jsxpragma
     jsxPragma: null,
     project: './tsconfig.json',
@@ -37,17 +37,19 @@ const languageOptions = {
 };
 
 const config = [
-  // package.json file
+  // package.json files
   {
     files: ['package.json'],
     ...packageJsonConfig,
   },
 
-  // JavaScript-based files
+  // JavaScript files
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions,
     linterOptions: {
+      // Recommended; this throws a warning when code contains disable comments
+      // for inactive ESLint rules
       reportUnusedDisableDirectives: true,
     },
     ...javaScriptConfig,
@@ -71,10 +73,11 @@ const config = [
     ...testConfig,
   },
 
-  // If using Prettier, the config must be last disable any rules that conflict
-  // with its formatting
+  // Disable any rules that conflict with Prettier formatting
   prettierConfig,
 ];
 
+// These rules prefer named exports; disabling the rule is necessary in many
+// third party integrations / config files
 // eslint-disable-next-line import/no-default-export
 export default config;
