@@ -16,7 +16,7 @@ const rules = {
   // Sorts nested objects alphabetically
   'sort-collections': ERROR,
   // May need to be disabled if a project is released via Semantic Release or
-  // other tools that require non-standard version values, etc.
+  // other tools that require non-standard values.
   'valid-package-def': ERROR,
 };
 

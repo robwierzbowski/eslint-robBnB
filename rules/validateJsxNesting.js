@@ -8,8 +8,9 @@ const validateJsxNestingPluginConfig = {
 };
 
 const rules = {
-  // Ensures that HTML in JSX is valid and will not be mangled/corrected by the
-  // browser
+  // Ensures that HTML in JSX is valid and will not be rearranged by the
+  // browser. Any mismatch between JSX and browser rendered HTML will cause hard
+  // to debug errors when hydrating SSR HTML.
   'no-invalid-jsx-nesting': ERROR,
 };
 

@@ -311,9 +311,9 @@ const suggestions = {
   'no-throw-literal': ERROR,
   'no-undef-init': ERROR,
   'no-undefined': ERROR,
-  // Polarizing, but 99% of time there's a better way to communicate private or
-  // unused vars. We should either organize code so the var is actually private,
-  // or use a descriptive name.
+  // This may be opinionated, but 99% of time there's a better way to
+  // communicate private or unused vars. We should either organize code so the
+  // var is actually private, or use a descriptive name.
   'no-underscore-dangle': ERROR,
   'no-unneeded-ternary': ERROR,
   'no-unused-expressions': ERROR,

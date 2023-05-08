@@ -37,8 +37,8 @@ const importStaticAnalysis = {
   named: [ERROR, {}],
   namespace: OFF,
   'no-absolute-path': ERROR,
-  // This rule has very poor performance, so disabled for now. If we create a
-  // command line only ruleset we should add this to it.
+  // This rule has poor performance, and could be moved under a CLI-only flag to
+  // prevent developer experience issues in the editor
   'no-cycle': [ERROR, { maxDepth: 5 }],
   'no-dynamic-require': ERROR,
   // Could be useful but requires project specific configuration
@@ -54,11 +54,11 @@ const importStaticAnalysis = {
 
 const importStyleGuide = {
   'consistent-type-specifier-style': [ERROR, 'prefer-top-level'],
-  // Only useful for webpack, so disabled
+  // Only useful for webpack; other bundlers like Vite are preferred
   'dynamic-import-chunkname': OFF,
   'exports-last': ERROR,
   // Useful if using certain module resolution patterns (e.g., nodeNext), but
-  // too project specific to enable
+  // too project-specific to enable
   extensions: OFF,
   first: ERROR,
   // I LOVE this rule. IMO it improves understandability of larger files.
@@ -70,7 +70,7 @@ const importStyleGuide = {
   // Unnecessary, we enforce named exports
   'no-anonymous-default-export': OFF,
   // Named exports create more consistent and searchable code. We can add an
-  // `eslint-disable-next-line comment` in settings files and similar third
+  // `eslint-disable-next-line` comment in settings files and similar third
   // party integrations that require default exports.
   'no-default-export': ERROR,
   // Unnecessary, handled by ESLint core
