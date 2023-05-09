@@ -12,15 +12,4 @@ const addPrefix = (prefix, unprefixedRules) =>
     ]),
   );
 
-// Returns the latest version of ES globals from the globals package
-const latestESGlobals = globals => {
-  const esKeyRegex = /^es20\d{2}$/u;
-  const latestESKey = Object.keys(globals)
-    .filter(key => key.match(esKeyRegex))
-    .sort()
-    .pop();
-
-  return globals[latestESKey];
-};
-
-export { ERROR, OFF, WARN, addPrefix, latestESGlobals };
+export { ERROR, OFF, WARN, addPrefix };

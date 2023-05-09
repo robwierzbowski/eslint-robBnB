@@ -117,5 +117,3 @@ const config = [
   },
 ];
 ```
-
-### DOC THAT HELPER

@@ -4,14 +4,14 @@
 import * as typescriptParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
-import { latestESGlobals, robBnBConfig } from './index.js';
+import { robBnBConfig } from './index.js';
 
 const languageOptions = {
   globals: {
     // Adding browser and node globals to all files for convenience
     ...globals.browser,
     ...globals.node,
-    ...latestESGlobals(globals),
+    ...globals.es2021,
   },
   // For reduced complexity we can ignore Babel and use typescript/parser to
   // parse both TS and modern JS files
