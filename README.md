@@ -45,19 +45,19 @@ _RW side note: I haven't published to NPM yet, for reasons, so currently you hav
 These rules expect your repository to be configured in the following ways. If it isn't you may need to alter related rules.
 
 - If using React, your bundler is configured to automatically insert the [new JSX transform](https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). Bundlers like [Vite](https://vitejs.dev/) do this by default.
-- If type safety is desired, you're using TypeScript. All PropType linters are disabled.
+- If type safety is desired, you're using [TypeScript](typescriptlang.org/). All PropType linters are disabled.
 - You're using [Prettier](https://prettier.io/). Many useful rules are disabled with the expectation that Prettier makes them unnecessary.
 
 ## Usage
 
-This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, we now reference and manipulate configuration as JS objects.
+This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, we now import configuration directly.
 
-The package provides plugin configuration and rules for the following file types, detected using the following glob patterns:
+The package provides plugin configurations, settings, and rules for the following file types, detected using the following glob patterns:
 
 - package.json files (`'**/package.json'`)
-- JavaScript-based files (`'**/*.js', '**/_.jsx', '**/_.ts', '**/*.tsx', '**/*.d.ts'`)
-- TypeScript files (`'**/*.ts', '**/_.tsx', '**/_.d.ts'`)
-- Test files using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)) (`'**/*.test.js', '**/_.test.jsx', '**/_.test.ts', '**/*.test.tsx', '**/test/**'`)
+- JavaScript-based files (`'**/*.js', '**/.jsx', '**/.ts', '**/*.tsx', '**/*.d.ts'`)
+- TypeScript files (`'**/*.ts', '**/.tsx', '**/.d.ts'`)
+- Test files using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)) (`'**/*.test.js', '**/.test.jsx', '**/.test.ts', '**/*.test.tsx', '**/test/**'`)
 
 ```js
 // eslint.config.js
@@ -69,8 +69,8 @@ const languageOptions = {
 };
 
 const config = [
-  // The robBnBConfig is an array of config objects and must be spread into
-  // the ESLint flat config
+  // robBnBConfig is an array of config objects and must be spread into the
+  // ESLint flat config
   ...robBnBConfig,
 
   // Your custom configuration
@@ -93,7 +93,7 @@ For a complete example see [this package's eslint.config.js file](https://github
 
 ### Overriding configuration and rules
 
-ESlint's new flat configuration file deep merges all configuration objects with a file glob that matches the file being linted. Add your own rules below the RobBnB config to override the rules it contains. [Read more about the flat configuration file cascade here](https://eslint.org/blog/2022/08/new-config-system-part-2/#goodbye-extends%2C-hello-flat-cascade).
+ESlint's new flat configuration system deep merges all configuration objects with a file glob that matches the file being linted. Add your own rules below the RobBnB config to override the rules it contains. [Read about the flat configuration file cascade here](https://eslint.org/blog/2022/08/new-config-system-part-2/#goodbye-extends%2C-hello-flat-cascade).
 
 ```js
 const config = [

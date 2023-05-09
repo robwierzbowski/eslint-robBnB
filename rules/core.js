@@ -493,6 +493,12 @@ const layoutAndFormatting = {
     { blankLine: 'always', prev: 'multiline-expression', next: '*' },
 
     { blankLine: 'always', prev: '*', next: ['cjs-export', 'export'] },
+    {
+      blankLine: 'any',
+      prev: ['cjs-export', 'export'],
+      next: ['cjs-export', 'export'],
+    },
+
     { blankLine: 'always', prev: '*', next: 'return' },
 
     { blankLine: 'always', prev: 'switch', next: '*' },
