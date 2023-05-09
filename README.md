@@ -50,7 +50,7 @@ _RW side note: I haven't published to NPM yet, for reasons, so currently you hav
 
 This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses the package's exported configuration directly.
 
-Additional rules and overrides are set using the flat config cascade. Every configuration object with a glob pattern that matches a file is deep merged, and the result is used to lint that file. Read more about the flat config cascade [in this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/).
+Additional rules and overrides are set using the flat config cascade. ESLint merges every configuration object with a glob pattern that matches a file, and the resulting config is used to lint that file. Read more about the flat config cascade [in this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/).
 
 eslint-robBnB adds configuration and rules for the following file types:
 
