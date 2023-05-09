@@ -94,4 +94,4 @@ const config = [
 export default config;
 ```
 
-For a complete working config file, see this package's [eslint.config.js](https://github.com/robwierzbowski/eslint-robBnB/blob/main/eslint.config.js).
+For a complete example, see this package's [eslint.config.js](https://github.com/robwierzbowski/eslint-robBnB/blob/main/eslint.config.js).
