@@ -14,7 +14,7 @@ For years engineers have extended AirBnB's config, and while it's a fantastic st
 
 ## Plugins
 
-This package configures and applies rules from the following plugins:
+This package applies rules from the following plugins:
 
 - [@regru/eslint-plugin-prefer-early-return](https://github.com/regru/eslint-plugin-prefer-early-return)
 - [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)
