@@ -51,7 +51,6 @@ const config = [
     },
   },
 
-  // Disable any rules that conflict with Prettier
   prettierConfig,
 ];
 

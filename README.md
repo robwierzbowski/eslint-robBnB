@@ -6,7 +6,7 @@ This package provides linter configuration and rulesets that help engineers writ
 
 The configuration focuses on modern JavaScript, TypeScript, and React. It avoids setting rules for legacy patterns (e.g., class components, PropTypes), deprecated APIs, and direct DOM manipulations.
 
-To improve code consistency, it enforces one implementation of a pattern when multiple exist. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for each` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but alternatives are more easily understood by a wide audience. Autofixable rules are used when possible, enabling automatic code transformation with a properly configured IDE.
+To improve code consistency, it enforces one implementation of a pattern when multiple exist. For example, functional React components are preferred over class components, and `Array` iteration methods are preferred over `for each` loops. Clever, less obvious patterns are forbidden; `Array.prototype.reduce` and bitwise operators may be terse, but alternatives are better understood by a wider audience. Autofixable rules are used when possible, enabling fixes on save with a properly configured IDE.
 
 ### Why not [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)?
 
@@ -44,11 +44,25 @@ Install the package and its peer dependencies.
 npm install eslint-robbnb eslint@^8
 ```
 
-_RW side note: I haven't published to NPM yet, for reasons, so currently you have to install directly from this github._
+_RW side note: I haven't published to NPM yet, for reasons, so currently you have to install directly from this github with `npm install eslint-robbnb@github:robwierzbowski/eslint-robbnb`._
 
 ## Usage
 
-This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses imported configuration directly.
+This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses the package's exported configuration directly.
+
+Additional rules and overrides are set using the flat config cascade. Every configuration object with a glob pattern that matches a file is deep merged, and the result is used to lint that file. Read more about the flat config cascade [in this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/).
+
+eslint-robBnB adds configuration and rules for the following file types:
+
+<!-- prettier-ignore -->
+| File type |  Glob patterns |
+| --- | --- |
+| package.json files | `**/package.json` |
+| JavaScript-based files | `**/*.js`, `**/*.jsx`, `**/*.cjs`, `**/*.mjs`, `**/*.ts`, `**/*.tsx`, `**/*.d.ts` |
+| TypeScript files | `**/*.ts`, `**/*.tsx`, `**/*.d.ts` |
+| Test files | `**/*.test.js`, `**/*.test.jsx`, `**/*.test.cjs`, `**/*.test.mjs`, `**/*.test.ts`, `**/*.test.tsx`, `**/test/**` |
+
+### Example configuration
 
 ```js
 // eslint.config.js
@@ -56,7 +70,7 @@ import prettierConfig from 'eslint-config-prettier';
 import { robBnBConfig } from 'eslint-robbnb';
 
 const config = [
-  // The import is an array of configuration objects and must be spread into
+  // The export is an array of configuration objects and must be spread into
   // the flat config
   ...robBnBConfig,
 
@@ -66,9 +80,12 @@ const config = [
     languageOptions: {
       // Configuration for parsers, globals, etc.
     },
+    rules: {
+      // Additional rules and overrides
+      'react/no-adjacent-inline-elements': 'error',
+    },
   },
 
-  // Disable any rules that conflict with Prettier
   prettierConfig,
 ];
 
@@ -77,43 +94,4 @@ const config = [
 export default config;
 ```
 
-For a complete working example see this package's [eslint.config.js](https://github.com/robwierzbowski/eslint-robBnB/blob/main/eslint.config.js).
-
-### Overriding rules
-
-ESLint's new flat configuration system merges all configuration objects who's `files` globs match the file being linted. For example, all configs with a `**/*.js` glob will be deep merged and used when linting a file named `foo.js`. [Read more about the flat cascade here](https://eslint.org/blog/2022/08/new-config-system-part-2/).
-
-The package provides plugin configuration, settings, and rules for the following file types, detected using the following glob patterns:
-
-<!-- prettier-ignore -->
-| File type |  Glob patterns |
-| --- | --- |
-| package.json files | `**/package.json` |
-| JavaScript-based files | `**/*.js`, `**/*.jsx`, `**/*.cjs`, `**/*.mjs`, `**/*.ts`, `**/*.tsx`, `**/*.d.ts` |
-| TypeScript files | `**/*.ts`, `**/*.tsx`, `**/*.d.ts` |
-| Test files that use [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | `**/*.test.js`, `**/*.test.jsx`, `**/*.test.cjs`, `**/*.test.mjs`, `**/*.test.ts`, `**/*.test.tsx`, `**/test/**` |
-
-Add rules below the RobBnB config to override the rules it contains.
-
-```js
-const config = [
-  ...robBnBConfig,
-
-  {
-    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
-    languageOptions: {
-      // Configuration for parsers, globals, etc.
-    },
-    rules: {
-      'react/no-adjacent-inline-elements': 'error',
-    },
-  },
-
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
-    rules: {
-      '@typescript-eslint/no-dynamic-delete': 'off',
-    },
-  },
-];
-```
+For a complete working config file, see this package's [eslint.config.js](https://github.com/robwierzbowski/eslint-robBnB/blob/main/eslint.config.js).
