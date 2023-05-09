@@ -37,6 +37,7 @@ import {
 } from './rules/validateJsxNesting.js';
 
 const javaScriptConfig = {
+  files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
   plugins: {
     ...importPluginConfig,
     ...jsxA11yPluginConfig,
@@ -67,6 +68,7 @@ const javaScriptConfig = {
 };
 
 const packageJsonConfig = {
+  files: ['**/package.json'],
   plugins: {
     ...packageJsonPluginConfig,
   },
@@ -77,6 +79,13 @@ const packageJsonConfig = {
 };
 
 const testConfig = {
+  files: [
+    '**/*.test.js',
+    '**/*.test.jsx',
+    '**/*.test.ts',
+    '**/*.test.tsx',
+    '**/test/**',
+  ],
   plugins: {
     ...jestPluginConfig,
     ...testingLibraryPluginConfig,
@@ -88,6 +97,7 @@ const testConfig = {
 };
 
 const typescriptConfig = {
+  files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
   plugins: {
     ...typescriptPluginConfig,
   },
@@ -96,4 +106,11 @@ const typescriptConfig = {
   },
 };
 
-export { javaScriptConfig, packageJsonConfig, testConfig, typescriptConfig };
+const robBnBConfig = [
+  packageJsonConfig,
+  javaScriptConfig,
+  typescriptConfig,
+  testConfig,
+];
+
+export { robBnBConfig };
