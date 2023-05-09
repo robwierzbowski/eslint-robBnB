@@ -52,7 +52,7 @@ This package uses the new [ESLint flat config](https://eslint.org/docs/latest/us
 
 Additional rules and overrides are set using the flat config cascade. ESLint merges every configuration object with a glob pattern that matches a file, and the resulting config is used to lint that file. Read more about the flat config cascade [in this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/).
 
-eslint-robBnB adds configuration and rules for the following file types:
+eslint-robBnB adds configuration objects for the following file types:
 
 <!-- prettier-ignore -->
 | File type |  Glob patterns |
