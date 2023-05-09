@@ -37,7 +37,15 @@ import {
 } from './rules/validateJsxNesting.js';
 
 const javaScriptConfig = {
-  files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.d.ts'],
+  files: [
+    '**/*.js',
+    '**/*.jsx',
+    '**/*.cjs',
+    '**/*.mjs',
+    '**/*.ts',
+    '**/*.tsx',
+    '**/*.d.ts',
+  ],
   plugins: {
     ...importPluginConfig,
     ...jsxA11yPluginConfig,
@@ -82,6 +90,8 @@ const testConfig = {
   files: [
     '**/*.test.js',
     '**/*.test.jsx',
+    '**/*.test.cjs',
+    '**/*.test.mjs',
     '**/*.test.ts',
     '**/*.test.tsx',
     '**/test/**',
