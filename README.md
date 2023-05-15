@@ -19,7 +19,6 @@ This package applies rules from the following plugins:
 - [@regru/eslint-plugin-prefer-early-return](https://github.com/regru/eslint-plugin-prefer-early-return)
 - [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)
 - [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) (an improved version of [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import))
-- [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest)
 - [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [eslint-plugin-package-json](https://github.com/zetlen/eslint-plugin-package-json)
 - [eslint-plugin-prefer-arrow](https://github.com/TristonJ/eslint-plugin-prefer-arrow)
@@ -29,6 +28,7 @@ This package applies rules from the following plugins:
 - [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library)
 - [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
 - [eslint-plugin-validate-jsx-nesting](https://github.com/MananTank/eslint-plugin-validate-jsx-nesting)
+- [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)
 
 ## Requirements
 
@@ -48,11 +48,9 @@ _RW side note: I haven't published to NPM yet, for reasons, so currently you hav
 
 ## Usage
 
-This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses the package's exported configuration directly.
+This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses exported configuration directly.
 
-Additional rules and overrides are set using the flat config cascade. ESLint merges every configuration object with a glob pattern that matches a file, and the resulting config is used to lint that file. Read more about the flat config cascade [in this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/).
-
-eslint-robBnB adds configuration objects for the following file types:
+eslint-robBnB adds configuration for the following file types. You can override rules using ESLint's flat configuration cascade, described in [this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/#goodbye-extends\%2C-hello-flat-cascade).
 
 <!-- prettier-ignore -->
 | File type |  Glob patterns |
