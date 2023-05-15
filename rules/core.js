@@ -117,7 +117,10 @@ const suggestions = {
   'no-case-declarations': ERROR,
   // This confusion is resolved by editor syntax highlighting
   'no-confusing-arrow': OFF,
-  'no-console': WARN,
+  // Let's use the no-console rule in place of runtime checks in tests. No one
+  // should be committing consoles unless they're building a command line util
+  // anyways, in which case they're likely using an abstraction.
+  'no-console': ERROR,
   'no-continue': ERROR,
   'no-delete-var': ERROR,
   'no-div-regex': ERROR,
