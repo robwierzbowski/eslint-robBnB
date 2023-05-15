@@ -4,7 +4,6 @@ import {
   importRules,
   importSettings,
 } from './rules/import.js';
-import { jestPluginConfig, jestRules } from './rules/jest.js';
 import { jsxA11yPluginConfig, jsxA11yRules } from './rules/jsxA11y.js';
 import {
   packageJsonPluginConfig,
@@ -35,6 +34,7 @@ import {
   validateJsxNestingPluginConfig,
   validateJsxNestingRules,
 } from './rules/validateJsxNesting.js';
+import { vitestPluginConfig, vitestRules } from './rules/vitest.js';
 
 const javaScriptConfig = {
   files: [
@@ -97,11 +97,11 @@ const testConfig = {
     '**/test/**',
   ],
   plugins: {
-    ...jestPluginConfig,
+    ...vitestPluginConfig,
     ...testingLibraryPluginConfig,
   },
   rules: {
-    ...jestRules,
+    ...vitestRules,
     ...testingLibraryRules,
   },
 };
