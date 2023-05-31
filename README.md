@@ -44,13 +44,11 @@ Install the package and its peer dependencies.
 npm install eslint-robbnb eslint@^8
 ```
 
-_RW side note: I haven't published to NPM yet, for reasons, so currently you have to install directly from this github with `npm install eslint-robbnb@github:robwierzbowski/eslint-robbnb`._
-
 ## Usage
 
 This package uses the new [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). Instead of referencing configuration via magic strings, it uses exported configuration directly.
 
-eslint-robBnB adds configuration for the following file types. You can override rules using ESLint's flat configuration cascade, described in [this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/#goodbye-extends\%2C-hello-flat-cascade).
+eslint-robBnB adds configuration for the following file types. You can override rules using ESLint's flat configuration cascade, described in [this blog post](https://eslint.org/blog/2022/08/new-config-system-part-2/#goodbye-extends%2C-hello-flat-cascade).
 
 <!-- prettier-ignore -->
 | File type |  Glob patterns |
