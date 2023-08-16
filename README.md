@@ -34,7 +34,7 @@ This package applies rules from the following plugins:
 
 - [x] If using React, your bundler is configured to automatically insert the [new JSX transform](https://legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). Bundlers like [Vite](https://vitejs.dev/) do this by default.
 - [x] You're using [TypeScript](typescriptlang.org/) for type safety. All PropType linters are disabled.
-- [x] You're using [Prettier](https://prettier.io/). Many useful rules are disabled with the expectation that Prettier makes them unnecessary.
+- [x] You're using [Prettier](https://prettier.io/). Many useful ESLint rules are disabled with the expectation that Prettier formatting will make them unnecessary.
 
 ## Installation
 
